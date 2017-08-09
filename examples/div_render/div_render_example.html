@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+  <script src="../js/socket.io.js"></script>
+  <link rel="stylesheet" href="../css/gui.css">
+  <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css" type="text/css" />
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script>
+  <script src="../js/div_render.js" ></script>
+
+</head>
+<body>
+
+<p>Breadboard images sent up on a websocket</p>
+  <div >
+    <div id="plotbox"></div>
+
+  </div>
+
+<script>
+var mouseX, mouseY;
+$(document).mousemove(function(e){
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+});
+
+var PLOT_HEIGHT = 200;
+var PLOT_WIDTH = 300;
+var plot;
+var plot2;
+window.onload = function(){
+    var socket = io('http://localhost:3000');
+    var unique = 456;
+    plot = new Div_Render("plotbox",'Boxo',PLOT_WIDTH, PLOT_HEIGHT,unique,socket);
+    console.log("created");
+}
+</script>
+
+</body>
+
+
+</html>
