@@ -13,13 +13,13 @@ function Toggle(div_id,title,names,unique,socket=null){
         //$("#"+div_id+unique+"_holder").append('<label for="slider-1">Input slider:</label><input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />');
         built = true;
         $("#"+div_id+unique+"_holder").trigger("create");
-        console.log("just enjanced");
         console.log("#"+div_id+unique+"toggle");
     }
     setup();
     if (socket != null){
         socket.on("update_"+unique,function(va){console.log("hit");if (built){$('#'+div_id+unique+"toggle").val(va).slider('refresh');}});
         $('#'+div_id+unique+"toggle").on('change',function(){
+            console.log('reporting', {'unique':unique, 'data':$(this).val()});
             socket.emit('reporting', {'unique':unique, 'data':$(this).val()});
         });
     };
