@@ -172,8 +172,8 @@ function alternate(div_id){
         // Determines which wave type the alternator object will be using
     	if ( command == "yes" ){
     		switch(wave_type){
-    			case "default": // Alternate at default rate
-    				var intervalId = setInterval(function(){default(label_id,div_id)}, Number(update_freq));
+    			case "default": // Alternate at standards rate
+    				var intervalId = setInterval(function(){standard(label_id,div_id)}, Number(update_freq));
     				intervals[div_id] = intervalId;
     				$(gear).css('color','green');
     				break;
@@ -203,8 +203,8 @@ function alternate(div_id){
     		$(gear).css('color','black');
     	}
     }
-    // For default alternation
-	function default(label_id,div_id){ // Just alterantes the value by changing the sign
+    // For standard alternation
+	function standard(label_id,div_id){ // Just alterantes the value by changing the sign
         var updated_val = - Number($( '#' + label_id ).val());
         $( '#' + label_id ).val( updated_val );
     }
