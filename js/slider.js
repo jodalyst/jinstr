@@ -91,6 +91,36 @@ function build_sliders(){
     }
 };
 
+// Changes color of settings gear 
+$(document).on("mouseover", ".fa-cog", function(){
+    $(this).css("background-color","#e9e9e9")
+});
+
+// Changes color of settings gear 
+$(document).on("mouseleave", ".fa-cog", function(){
+    $(this).css("background-color","initial");
+});
+
+// Opens autopilot for that slider when clicked
+$(document).on("click",".fa-cog",function(){
+    build_slider_autopilot(this.id);
+});
+
+// Update value of input field when the enter key is selected
+$(document).on('keyup','input', function (e) {
+    if (e.keyCode == 13){
+        $(this).attr("value",$(this).val());
+        $(this).blur();
+    }
+});
+
+// // Does something with sliders
+// $('._slider').change(function(){
+//     var message = 'change';
+//     console.log($(this).attr('id'),$(this).val());
+//     socket.emit(message,{id: $(this).attr('id'), val:$(this).val()});
+// });
+
 // Function that builds/hides the autopilot for a selected div
 function build_slider_autopilot(div_id){
 	var socket = io('http://localhost:3000');
