@@ -1,0 +1,65 @@
+[
+    {
+        "slider": [
+            {
+                "name": "ToneGenerator",
+                "low": -1000,
+                "high": 1000,
+                "resolution": 1,
+                "unique": 1001
+            },
+            {
+                "name": "Joe",
+                "low": -200,
+                "high": 200,
+                "resolution": 1
+            },
+            {
+                "name": "Joe",
+                "low": -200,
+                "high": 200,
+                "resolution": 1
+            },           
+            {
+                "name": "Joe",
+                "low": -200,
+                "high": 200,
+                "resolution": 1
+            }
+        ]
+    },
+    {
+        "timeseries": [
+            {
+                "name": "dB",
+                "low": 0,
+                "high": 10,
+                "color": "green"
+            }
+
+        ]
+    },
+    {
+        "parallel": [
+            {
+                "name": "FFT",
+                "low": -100,
+                "high": 10000,
+                "color": "red",
+                "graph_type": "line",
+                "label_names": "jesus,estalit",
+                "type": "P"
+            },
+            {
+                "name": "AveragedFFT",
+                "low": -100,
+                "high": 10000,
+                "color": "green",
+                "graph_type": "line",
+                "label_names": "jesus,amen,hahaha",
+                "type": "P"
+            }
+        ]
+    }
+]
+
