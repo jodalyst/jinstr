@@ -6,12 +6,6 @@ from threading import Thread, Lock
 import serial
 import struct
 
-########################
-##                    ##
-##    SERVER SETUP    ##
-##                    ##
-########################
-
 # Set up logging
 import logging
 log = logging.getLogger('werkzeug')
