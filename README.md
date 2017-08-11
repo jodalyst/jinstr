@@ -105,7 +105,6 @@ reporter_y.step(Math.random());
 function Numerical_Reporter(div_id,title,range,color,bg_color, unique, socket=null){
 ```
 
-
 * `div_id`: The DOM div where you want the thing to live
 * `title`: The title you'd like to show up for your plot
 * `range`: If you'd like to limit the displayed numerical range use this. It needs an array of `[low_limit,high_limit]`.  If you'd like to avoid using this, specify a `range` of `[,]`
@@ -119,7 +118,42 @@ function Numerical_Reporter(div_id,title,range,color,bg_color, unique, socket=nu
 
 ### `Slider`
 
-The basic idea is an object that will link command sliders to an Alternator thing (Gonzo's job)
+```
+function Slider(div_id,name,min,max,resolution,unique,socket){
+```
+
+To manually build a slider, you need to specify everything except a socket, which is optional:
+
+* `div_id` : The html DOM id of where you want to build the plot (valid string)
+* `name`: The name for the slider, can be the same as div_id
+* `min` : The minimum value of the slider
+* `max` : The maximum value of the slider
+* `resolution` : The resolution that the slider value will change as it is automated or controlled
+* `unique`: A unique (for the page) identifier for the jinstrument object that is to be generated (can be numbers or letters, but ideally no special characters)
+* `socket`: a socket for connection, updating. Defaults to null.
+
+An example set of supporting code would be:
+
+```
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script src="./js/slider.js" ></script>
+<link rel="stylesheet" href="./css/gui.css">
+```
+
+with a body of:
+```
+<body>
+  <div id="magic"></div>
+</body>
+```
+
+And then the following script in the document:
+(Note that socket is not specified, which is fine)
+
+```
+var slider = new Slider("magic","Magic Johnson",0,100,1,123456);
+```
+You will probably notice `slider_generate` and `build_sliders` in the code. These are functions that are only called if you have a page building off of a specified config.json. 
 
 ### `Joystick`
 
