@@ -30,6 +30,7 @@ def jsonUniquer(file):
 					unique = newUnique(3)
 					# Checks if identifier hasn't already been used
 					if unique not in uniques:
+						# Assings identifier for that module
 						items['unique'] = unique
 
 	# Write modified json file
