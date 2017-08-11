@@ -1,5 +1,3 @@
-
-
 function Div_Render(div_id,title,width,height,unique, socket=null){
     var div_id = div_id;
     var title = title;
