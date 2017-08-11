@@ -153,7 +153,7 @@ And then the following script in the document:
 ```
 var slider = new Slider("magic","Magic Johnson",0,100,1,123456);
 ```
-You will probably notice `slider_generate` and `build_sliders` in the code. These are functions that are only called if you have a page building off of a specified config.json. 
+You will probably notice `slider_generate()` and `build_sliders()` in the code. These are functions that are only called if you have a page building off of a specified config.json. 
 
 ### `Joystick`
 
