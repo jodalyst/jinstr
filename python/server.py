@@ -62,7 +62,7 @@ def index():
         dataThread()
         thread.daemon = True
         thread.start()
-    # return render_template('/pages/main.html')
+    return render_template('/pages/main.html')
 
 # Return the configuration
 @app.route('/config', methods=['GET', 'POST'])
