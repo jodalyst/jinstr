@@ -1,11 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-//                                                                          //
-//    Page Locker                                                           //
-//                                                                          //
-//       Job: Locks the page when toggle is flipped or when u is pressed    //
-//                                                                          //                                                                                   //
-//////////////////////////////////////////////////////////////////////////////
-
 // Associated with THE lock toggle
 function lockToggle(div_id,title,names,unique,socket=null){
     var div_id = String(div_id);
@@ -52,7 +44,3 @@ function keypressLockToggle(unique){
         console.log("all draggable things should be enabled");
     }
 };
-
-
-
-
