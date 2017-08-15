@@ -62,7 +62,8 @@ def index():
         dataThread()
         thread.daemon = True
         thread.start()
-    return render_template('/pages/main.html')
+    #return render_template('/pages/main.html')
+    return "{}".format(identifiers)
 
 # Return the configuration
 @app.route('/config', methods=['GET', 'POST'])
@@ -95,7 +96,8 @@ def checkJson(json_url):
     # Open Json
     with open(json_url, "r") as jsonFile:
         config = json.load(jsonFile)
-
+    print("configuration file")
+    print(config)
     # Function to generate new unique identifier
     def newUnique(n):
         range_start = 10**(n-1)
@@ -107,8 +109,11 @@ def checkJson(json_url):
     # Open up modules portion of config.json
     modules = config[1]['modules']
     for module in modules:
+        print("scanning module: {}".format(module)) 
         for instance in module:
+            print("scanning module instance: {}".format(instance))
             for item in module[instance]:
+                print("scanning item: {}".format(item))
                 # Check if module already has unique identifer
                 if 'unique' in item:
                     # Appends existing identifier to uniques
