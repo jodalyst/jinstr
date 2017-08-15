@@ -6,6 +6,7 @@ function Slider(div_id,name,min,max,resolution,unique,socket=null){
 	var div_id = document.getElementById(div_id);
 	$(div_id).addClass("slider-container draggable");
 	$(div_id).attr('id',name+'_div');
+	$(div_id).attr('unique',unique);
 	$(div_id).append('<label class="slider-item" style="border:0px solid red" for="'+name+'">'+name+':</label>'); // label as slider item
 	var slider = document.createElement("div");
 	$(slider).addClass("ui-slider slider-item"); // slider as slider item
@@ -44,10 +45,11 @@ function Slider(div_id,name,min,max,resolution,unique,socket=null){
 var sliders = new Array();
 
 // Generate html for sliders
-function slider_generate(name,min,max,resolution){
+function slider_generate(name,min,max,resolution,unique){
 	var slider_container = document.createElement("div");
 	$(slider_container).addClass("slider-container draggable");
 	$(slider_container).attr('id',name+'_div');
+	$(slider_container).attr('unique',unique);
 	$(slider_container).append('<label class="slider-item" style="border:0px solid red" for="'+name+'">'+name+':</label>'); // label as slider item
 	var slider = document.createElement("div");
 	$(slider).addClass("ui-slider slider-item"); // slider as slider item
@@ -103,7 +105,9 @@ $(document).on("mouseleave", ".fa-cog", function(){
 
 // Opens autopilot for that slider when clicked
 $(document).on("click",".fa-cog",function(){
-    build_slider_autopilot(this.id);
+	div_id = this.id
+	unique = $(this).parent().attr('unique');
+    build_slider_autopilot(div_id,unique);
 });
 
 // Update value of input field when the enter key is selected
@@ -122,14 +126,14 @@ $(document).on('keyup','input', function (e) {
 // });
 
 // Function that builds/hides the autopilot for a selected div
-function build_slider_autopilot(div_id){
+function build_slider_autopilot(div_id, unique){
 	var socket = io('http://localhost:3000');
 
 	var autopilot = div_id+'_autopilot';
 	// Sets up everything......
 	var setup = function(){ // Build for that div the first time.
 		$('#' + autopilot).append('<div class="autopilot-container" id="'+autopilot+'_holder"></div>');
-		var alternator = new Toggle(autopilot,"alternate?",["no","yes"],'1069',socket);
+		var alternator = new Toggle(autopilot,"alternate?",["no","yes"],unique,socket);
 		$('#'+autopilot+'_holder').append(alternator);
 		$('#'+autopilot+'_holder').append('Wave Type:<select name="waves"'
 			+ 'style="background-color:#f6f6f6;display:table-cell;width:100%;">'
@@ -198,9 +202,10 @@ function build_slider_autopilot(div_id){
     var thing = new alternate(div_id); 
 
     if (socket != null){ // Whenever an on,off toggle for an alternator has been toggled, this gets triggered
-        socket.on("autopilot_1069",function(div,command){
-            thing.update(div,command);
-		}); 
+        // Universal Listener
+        socket.on("announce_"+unique,function(unique, div, data){
+			thing.update(div,data);
+		});
     };
 };
 
