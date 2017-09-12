@@ -19,10 +19,21 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     var height = total_height - margin.top - margin.bottom;
     var total_width = width;
     var width = total_width - margin.right - margin.left;
-    var overall = $("#"+div_id).append("<div id=\""+div_id+unique+"_overall\">");
-    var title_div = $("#"+div_id+unique+"_overall").append("<div class=\"plot_title\" id=\""+div_id+unique+"_title\">"+title+"</div>");
-    var top_row = $("#"+div_id+unique+"_overall").append("<div class=\"chart\" id=\""+div_id+unique+"top\">");
-    var bottom_row = $("#"+div_id+unique+"_overall").append("<div class=\"chart\" id=\""+div_id+unique+"bot\">");
+    var overall = document.createElement('div');
+    overall.setAttribute("id", div_id+unique+"_overall");
+    document.getElementById(div_id).appendChild(overall);
+    var title_div = document.createElement('div');
+    title_div.setAttribute("id", div_id+unique+"_title");
+    title_div.setAttribute("class", div_id+unique+"plot_title");
+    overall.appendChild(title_div);
+    var top_row = document.createElement('div');
+    top_row.setAttribute('id', div_id+unique+"top");
+    top_row.setAttribute('class',"chart");
+    overall.appendChild(top_row);
+    var bottom_row = document.createElement('div');
+    bottom_row.setAttribute('id', div_id+unique+"bot");
+    bottom_row.setAttribute('class',"chart");
+    overall.appendChild(bottom_row);
     var line;
     var traces;
     
