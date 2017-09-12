@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+  <script src="/js/socket.io.js"></script>
+  <script src="/js/time_series.js" ></script>
+  <link rel="stylesheet" href="/css/gui.css">
+
+
+</head>
+<body>
+<p>Signal below is sent up from Python server via websocket</p>
+  <div >
+    <div id="plotbox"></div>
+
+  </div>
+</body>
+
+<script>
+var mouseX, mouseY;
+$(document).mousemove(function(e){
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+});
+
+var PLOT_HEIGHT = 200;
+var PLOT_WIDTH = 300;
+var plot;
+var plot2;
+window.onload = function(){
+    var socket = io('http://localhost:3000');
+    var unique = 456;
+    plot = new Time_Series("plotbox",'Sine Waves',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],2,["green","yellow"],unique,socket);
+    plot2 = new Time_Series("plotbox",'Mouse Moves',PLOT_WIDTH, PLOT_HEIGHT,60,[0,1000],2,["red","blue"],unique+1);
+    timer = setInterval(function(){
+        plot2.step([[mouseX],[mouseY]]);
+    }, 10);
+}
+</script>
+
+</html>
