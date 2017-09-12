@@ -61,7 +61,7 @@ elif async_mode == 'gevent':
     monkey.patch_all()
 
 #Start up Flask server:
-app = Flask(__name__, template_folder = './',static_url_path='/../../')
+app = Flask(__name__, template_folder = './',static_folder='../../src')
 app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
 socketio = SocketIO(app, async_mode = async_mode)
 thread = None
@@ -87,7 +87,7 @@ def dataThread():
         set2.append(ampo2*math.sin(omega2*time.time()))
         counter +=1
         if counter%burst_duration == 0:
-            socketio.emit('update_{}'.format(unique),[set1,set2],broadcast =True)
+            socketio.emit('update_{}'.format(unique),[set1,set2])#,broadcast =True)
             set1 = []
             set2 = []
             #print('sending')
