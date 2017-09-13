@@ -43,12 +43,12 @@ function Bar_Parallel_Plot(div_id,name,num_values,labels,plot_width,plot_height,
   var top = overall.append("div").attr("class","chart").attr("id",div_id+unique+"top");
 
   $("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC2\" >");
-  $("#"+div_id+unique+"BC2").append("<button class='scalerp' id=\""+div_id+unique+"VP\">Z+</button>");
-  $("#"+div_id+unique+"BC2").append("<button class='scalerp' id=\""+div_id+unique+"RS\">RS</button>");
-  $("#"+div_id+unique+"BC2").append("<button class='scalerp' id=\""+div_id+unique+"VM\">Z-</button>");
+  $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VP\">Z+</button>");
+  $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"RS\">RS</button>");
+  $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VM\">Z-</button>");
   $("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC1\" >");
-  $("#"+div_id+unique+"BC1").append("<button class='scalerp' id=\""+div_id+unique+"OI\">O+</button>");
-  $("#"+div_id+unique+"BC1").append("<button class='scalerp' id=\""+div_id+unique+"OD\">O-</button>");
+  $("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OI\">O+</button>");
+  $("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OD\">O-</button>");
   function build_plot(){
     //create x axis scale
     var xScale = d3.scale.linear().domain([margin.left,plot_width]).range([margin.left,plot_width]);
@@ -153,7 +153,7 @@ function Bar_Parallel_Plot(div_id,name,num_values,labels,plot_width,plot_height,
       var element = d3.select(".x.axis").node();
       var bottom_padding = element.getBoundingClientRect().height;
 
-  this.step_p = function(values){
+  this.step = function(values){
     var newData = [];
     for(i = 0; i<values.length;i++){
       newData[i] = scaler(values[i]);

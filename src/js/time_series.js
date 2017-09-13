@@ -127,7 +127,7 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     if (socket != null){
         socket.on("update_"+unique,function(values){steppo(values);});
     }
-    overall_div.on("click",function(event){
+    $("#"+div_id).on("click",function(event){
         switch(event.target.id){
             case div_id+unique+"VM": 
                 var parent_range = y_range[1] - y_range[0];

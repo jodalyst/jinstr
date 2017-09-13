@@ -48,8 +48,8 @@
 
       var state = 0;
       timer = setInterval(function(){
-        plot2.step_p([mouseX,mouseY]);
-        plot.step_p([mouseX,mouseY,mouseX,mouseY]);
+        plot2.step([mouseX,mouseY]);
+        plot.step([mouseX,mouseY,mouseX,mouseY]);
       }, 10);
 
       timer2 = setInterval(function(){
@@ -57,7 +57,7 @@
         for (var i =0; i<lenn; i++){
           vals.push(20*Math.random());
         }
-        plot3.step_p(vals);
+        plot3.step(vals);
       },50);
     </script>
   </body>
