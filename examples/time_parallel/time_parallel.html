@@ -22,6 +22,7 @@
       <div id = "line_ex"></div>
       <div id="bar_ex"></div>
       <div id="bar2_ex"></div>
+      <div id="bar3_ex"></div>
     </div>
 
 
@@ -45,7 +46,7 @@
         inputs.push(i);
       }
       var plot3 = new Bar_Parallel_Plot("bar2_ex","Bar Parallel Example 2",lenn,inputs,PLOT_WIDTH,PLOT_HEIGHT,MAX,MIN,"red","bb");
-
+      var plot4 = new Time_Parallel("bar3_ex","Time Parallel Example 3", 300,400,5,[-10,10],1,['red'],456)
       var state = 0;
       timer = setInterval(function(){
         plot2.step([mouseX,mouseY]);
