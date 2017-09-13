@@ -49,7 +49,6 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     var chartBody;
     
     var draw_plot_region = function(){
-        console.log("drawing plot for "+unique);
         if (xchange){
             xchange = false;
             if (vals> data[0].length){//increasing amount
@@ -79,7 +78,6 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
         chartBody = chart.append("g").attr("clip-path","url(#"+div_id+unique+"clip"+")");
         line = new d3.svg.line().x(function(d, i) { return x(i)+margin.left; }.bind(this)).y(function(d, i) { return y(d)+margin.top; }.bind(this));
         traces = [];
-        console.log(line);
         for (var i=0; i<num_traces; i++){
             traces.push(chartBody.append("path").datum(data[i]).attr("class","line").attr("d",line).attr("stroke",colors[i]));
         }
@@ -130,7 +128,6 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
         socket.on("update_"+unique,function(values){steppo(values);});
     }
     overall_div.on("click",function(event){
-        console.log(event.target.id);
         switch(event.target.id){
             case div_id+unique+"VM": 
                 var parent_range = y_range[1] - y_range[0];
