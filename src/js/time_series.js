@@ -18,6 +18,7 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     }
     var height = total_height - margin.top - margin.bottom;
     var total_width = width;
+    var overall_div = document.getElementById(div_id);  //overall handler to that dom element
     var width = total_width - margin.right - margin.left;
     var overall = document.createElement('div');
     overall.setAttribute("id", div_id+unique+"_overall");
@@ -87,14 +88,26 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
         chart.append("g").attr("class", "y axis").attr("transform","translate("+margin.left+","+margin.top+")").call(y_axis);
     };
     draw_plot_region();
-    $("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC2\" >");
+    var BC2 = document.createElement('div');
+    BC2.setAttribute("id", div_id+unique+"BC2");
+    BC2.setAttribute("class", "v_button_container");
+    top_row.insertBefore(BC2,top_row.firstChild); 
+    //$("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC2\" >");
     $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VP\">Z+</button>");
     $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VRS\">RS</button>");
     $("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VM\">Z-</button>");
-    $("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC1\" >");
+    var BC1 = document.createElement('div');
+    BC1.setAttribute("id", div_id+unique+"BC1");
+    BC1.setAttribute("class", "v_button_container");
+    top_row.insertBefore(BC1,top_row.firstChild); 
+    //$("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC1\" >");
     $("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OI\">O+</button>");
     $("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OD\">O-</button>");
-    $("#"+div_id+unique+"bot").append("<div class ='h_button_container' id = \""+div_id+unique+"BC4\" >");
+    var BC4 = document.createElement('div');
+    BC4.setAttribute("id", div_id+unique+"BC4");
+    BC4.setAttribute("class", "h_button_container");
+    bottom_row.appendChild(BC4);
+    //$("#"+div_id+unique+"bot").append("<div class ='h_button_container' id = \""+div_id+unique+"BC4\" >");
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HM\">Z-</button>");
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HRS\">RS</button>");
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HP\">Z+</button>");
@@ -108,7 +121,7 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
                 }
             }
     };
-    var steppo = this.step;
+    var steppo = this.step; //need to do this for scoping issues when we get inside the socket callback!
     var update_scales = function(){
         d3.select("#svg_for_"+div_id+unique).remove();
         draw_plot_region();
@@ -116,7 +129,7 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     if (socket != null){
         socket.on("update_"+unique,function(values){steppo(values);});
     }
-    $("#"+div_id).on("click",function(event){
+    overall_div.on("click",function(event){
         console.log(event.target.id);
         switch(event.target.id){
             case div_id+unique+"VM": 
