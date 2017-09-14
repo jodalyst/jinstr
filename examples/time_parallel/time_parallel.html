@@ -46,7 +46,7 @@
         inputs.push(i);
       }
       var plot3 = new Bar_Parallel_Plot("bar2_ex","Bar Parallel Example 2",lenn,inputs,PLOT_WIDTH,PLOT_HEIGHT,MAX,MIN,"red","bb");
-      var plot4 = new Time_Parallel("bar3_ex","Time Parallel Example 3", 300,400,5,[-10,10],1,['red'],456)
+      var plot4 = new Time_Parallel("bar3_ex","Time Parallel Example 3", 400,300,[0,20],[-10,10],1,['green'],456)
       var state = 0;
       timer = setInterval(function(){
         plot2.step([mouseX,mouseY]);
@@ -55,10 +55,13 @@
 
       timer2 = setInterval(function(){
         var vals =[];
+        var things = [];
         for (var i =0; i<lenn; i++){
           vals.push(20*Math.random());
+          things.push([i,20*(Math.random()-0.5)]);
         }
         plot3.step(vals);
+        plot4.step([vals]);
       },50);
     </script>
   </body>

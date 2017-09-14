@@ -212,6 +212,17 @@ svg {
     flex-direction: row;
 }
 
+.h_chart {
+    position: relative;
+    left: 0px;
+    margin: 10px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 .button_holder{
     width: 150px;

@@ -173,17 +173,24 @@ function Line_Parallel_Plot(div_id,name,num_values,plot_width,plot_height,max_va
   }
 }
 
-function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colors, unique, socket=null){
+function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colors, unique, dots= false, starting_vals = 10, socket=null){
     var div_id = div_id;
     var title = title;
     var unique = unique;
     var socket = socket;
     var colors = colors;
+    var dots = dots;
+    if (dots){
+      var dots_mult = 1;
+    }else{
+      dots_mult = 0;
+    }
     var y_range_orig = y_range.slice(0); //used for reset mechanisms.
-    var vals_orig = x_range;
+    var x_range_orig = x_range.slice(0);
+    var vals_orig = starting_vals;
     var y_range = y_range.slice(0);
     var num_traces = num_traces;
-    var vals = x_range;
+    var vals = starting_vals;
     var total_height = height;
     var xchange = false;
     var margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -208,7 +215,7 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
     overall.appendChild(top_row);
     var bottom_row = document.createElement('div');
     bottom_row.setAttribute('id', div_id+unique+"bot");
-    bottom_row.setAttribute('class',"chart");
+    bottom_row.setAttribute('class',"h_chart");
     overall.appendChild(bottom_row);
     var line;
     var traces;
@@ -241,7 +248,7 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
         chart = d3.select("#"+div_id+unique+"top").append("svg")
         .attr("id","svg_for_"+div_id+unique).attr("width",total_width).attr("height",total_height).attr('style',"display:inline-block;").attr("class", "gsc");
         y = d3.scale.linear().domain([y_range[0],y_range[1]]).range([height,0]);
-        x = d3.scale.linear().domain([0,vals-1]).range([0,width]);
+        x = d3.scale.linear().domain([x_range[0],x_range[1]]).range([0,width]);
         x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(11);
         y_axis = d3.svg.axis().scale(y).orient("left").ticks(11);
         x_grid = d3.svg.axis().scale(x).orient("bottom").ticks(20).tickSize(-height, 0, 0).tickFormat("");
@@ -255,6 +262,11 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
         traces = [];
         for (var i=0; i<num_traces; i++){
             traces.push(chartBody.append("path").datum(data[i]).attr("class","line").attr("d",line).attr("stroke",colors[i]));
+            if (dots){
+              traces.push(chartBody.append("circle").attr("cy",function(d,i){return scaler(d);}).attr("stroke",color)
+                .attr("stroke-width","3").attr("r","1").attr("cx",function(d,i){return ticks[i];})
+                .attr("class","circle_parallel").style("fill",colors[i]));
+            }
         }
         chart.append("g").attr("class", "x axis").attr("transform","translate("+margin.left+","+(height+margin.top)+")").call(x_axis).selectAll("text")
         .attr("y", -5).attr("x", 20).attr("transform", "rotate(90)");
@@ -284,12 +296,20 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HM\">Z-</button>");
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HRS\">RS</button>");
     $("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HP\">Z+</button>");
+    var BC3 = document.createElement('div');
+    BC3.setAttribute("id", div_id+unique+"BC3");
+    BC3.setAttribute("class", "h_button_container");
+    bottom_row.appendChild(BC3) 
+    //$("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC1\" >");
+    $("#"+div_id+unique+"BC3").append("<button class='scaler' id=\""+div_id+unique+"HOD\">O-</button>");
+    $("#"+div_id+unique+"BC3").append("<button class='scaler' id=\""+div_id+unique+"HOI\">O+</button>");
+
     this.step = function(values){
             //this.trace.attr("d",this.line).attr("transform",null).transition().duration(0).ease("linear").attr("transform","translate("+this.x(-1)+",0)");
             for (var i=0; i<values.length; i++){
-                traces[i].attr("d",line).attr("transform",null);
+                traces[(dots_mult+1)*i].attr("d",line).attr("transform",null);
                 for (var j=0; j<values[i].length;j++){
-                    data[i] = values[i];
+                    data[(dots_mult+1)*i] = values[i];
                     //data[i].push(values[i][j]);
                     //data[i].shift();
                 }
@@ -323,21 +343,38 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
                 y_range =y_range_orig.slice(0);
                 update_scales();
                 break;
-            case div_id+unique+"HM":
-                if (vals >4){
-                    vals = Math.round(vals/2);
-                }
-                xchange = true;
+            case div_id+unique+"HM": 
+                var parent_range = x_range[1] - x_range[0];
+                var parent_mid = (x_range[1] - x_range[0])/2 + x_range[0];
+                x_range[1] = (x_range[1] - parent_mid)*2+parent_mid;
+                x_range[0] = parent_mid-(parent_mid - x_range[0])*2;
                 update_scales();
                 break;
             case div_id+unique+"HP":
-                vals = vals*2;
-                xchange = true;
+                var parent_range = x_range[1] - x_range[0];
+                var parent_mid = (x_range[1] - x_range[0])/2 + x_range[0];
+                x_range[1] = (x_range[1] - parent_mid)*0.5+parent_mid;
+                x_range[0] = parent_mid-(parent_mid - x_range[0])*0.5;
                 update_scales();
                 break;
             case div_id+unique+"HRS":
+                x_range =x_range_orig.slice(0);
                 vals =vals_orig;
                 xchange = true;
+                update_scales();
+                break;
+            case div_id+unique+"HOD":
+                var diff = x_range[1] - x_range[0];
+                var tp = diff*0.1;
+                x_range[1] = x_range[1]+tp;
+                x_range[0]=x_range[0]+tp;
+                update_scales();
+                break;
+            case div_id+unique+"HOI":
+                var diff = x_range[1] - x_range[0];
+                var tp = diff*0.1;
+                x_range[1] = x_range[1]-tp;
+                x_range[0] = x_range[0]-tp;
                 update_scales();
                 break;
             case div_id+unique+"OD":
@@ -358,6 +395,18 @@ function Time_Parallel(div_id,title,width,height,x_range,y_range,num_traces,colo
     });
 };
 
+            // case div_id+unique+"HM":
+            //     if (vals >4){
+            //         vals = Math.round(vals/2);
+            //     }
+            //     xchange = true;
+            //     update_scales();
+            //     break;
+            // case div_id+unique+"HP":
+            //     vals = vals*2;
+            //     xchange = true;
+            //     update_scales();
+            //     break;
 
 
 
