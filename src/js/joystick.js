@@ -2,11 +2,11 @@
 var options = new Array();
 var joysticks = new Array();
 
-function Joystick(div_id,name,mode,size,color,catchdistance=null,config=false,static=false){
+function Joystick(div_id,name,mode,size,color,unique,catchdistance=null,config=false,static=false,socket=null){
+	// If you're building your joystick using main.js from the config.json, it builds here
 	if ( config ) {
 		var container = document.createElement("div");
-		$(container).addClass('draggable joystick-container sbs');
-		// $(container).addClass('sbs');
+		$(container).addClass('draggable joystick-container sbs dump');
 		$(container).css({
 			height: size,
 			width: size,
@@ -16,6 +16,7 @@ function Joystick(div_id,name,mode,size,color,catchdistance=null,config=false,st
 		var package = document.createElement("div");
 		$(package).addClass('joystick-item');
 		$(package).attr('id',div_id);
+		$(package).attr('unique',unique);
 		$(package).css({
 			top: 0,
 			left: 0,
@@ -26,7 +27,6 @@ function Joystick(div_id,name,mode,size,color,catchdistance=null,config=false,st
 		$(package).appendTo(container);
 		$(container).appendTo($("#drag_container")).trigger("create");	
 	};
-	
 	// Compile the options	
 	switch (mode) {
 		case 'dynamic':
@@ -57,87 +57,48 @@ function Joystick(div_id,name,mode,size,color,catchdistance=null,config=false,st
 	};
 	// If the joystick is going to be built for a static page (i.e. not shape-shifted)
 	if ( static ) {
-		// var joystick = nipplejs.create(option);
-		// joysticks.push(joystick);
+		var joystick = nipplejs.create(option);
+		bindNipple(joystick)
+		joysticks.push(joystick);
 	}
 	// Add joystick configuration to array for buildJoysticks()
 	options.push(option);
 };
 
+// Function that takes goes through joystick configs stored in options array and builds them
 function buildJoysticks(){
 	for(var i = 0; i < options.length; i++){
 		var joystick = nipplejs.create(options[i]);
+		bindNipple(joystick);
 		joysticks.push(joystick);
 	};
 };
 
+// Function that goes throuhg all active joysticks (stored in joysticks...)
 function clearJoysticks(){
 	for(var i = 0; i < joysticks.length; i++){
 		joysticks[i].destroy();
 	};
 };
 
+// Function that destroys and rebuilds joysticks (good for when the page moves around)
 function fixJoysticks(){
 	clearJoysticks();
 	buildJoysticks();
 }
 
-// {
-//   "color": "red",
-//   "div_id": "rod",
-//   "mode": "dynamic",
-//   "name": "lulz",
-//   "size": 200,
-//   "unique": 899
-// },
-// {
-//   "catchdistance": 150,
-//   "div_id": "kat",
-//   "mode": "semi",
-//   "name": "kittykat",
-//   "size": 200,
-//   "unique": 446
-// },
-// {
-//   "color": "blue",
-//   "div_id": "gonzo",
-//   "mode": "static",
-//   "name": "lit",
-//   "size": 200,
-//   "unique": 127
-// }
+// Function that binds every nipple object to it's actions and calls debug from here
+function bindNipple (joystick) {
+    joystick.on('start end', function (evt, data) {
+        log(data);
+    }).on('move', function (evt, data) {
+        log(data);
+    });
+}
 
-// {
-//   "color": "green",
-//   "div_id": "rod",
-//   "mode": "static",
-//   "name": "jesus",
-//   "size": 200,
-//   "unique": 120
-// },
-// {
-//   "color": "orange",
-//   "div_id": "kat",
-//   "mode": "static",
-//   "name": "kittykat",
-//   "size": 200,
-//   "unique": 128
-// },
-// {
-//   "color": "blue",
-//   "div_id": "gonzo",
-//   "mode": "static",
-//   "name": "lit",
-//   "size": 200,
-//   "unique": 127
-// }
-
-
-// {
-//   "color": "red",
-//   "div_id": "kat",
-//   "mode": "static",
-//   "name": "jesus",
-//   "size": 200,
-//   "unique": 243
-// }
+// Function that will log elements
+function log (obj) {
+    setTimeout(function () {
+        console.log(obj);
+    }, 0);
+}
