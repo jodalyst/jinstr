@@ -1,30 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Raleway');
-
-
-body{
+body {
     font-family: 'Raleway', sans-serif;
     margin: 50px;
-
-
 }
 
-h1 h2 h3 h4{
+h1 h2 h3 h4 {
     font-family: 'Open Sans', sans-serif;
-
 }
 
-.side_note{
+.side_note {}
 
+.containing-element .ui-slider-switch {
+    width: 15em
 }
 
-.containing-element .ui-slider-switch { width: 15em }
 svg {
     font: 10px sans-serif;
 }
+
 .line {
     fill: none;
     stroke-width: 1.5px;
 }
+
 .axis path,
 .axis line {
     fill: none;
@@ -32,14 +30,14 @@ svg {
     shape-rendering: crispEdges;
 }
 
-.plot_title{
+.plot_title {
     margin-top: 10px;
     text-align: center;
     font-weight: bold;
     font-size: 18px;
 }
 
-.number_holder{
+.number_holder {
     margin: 5px;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -47,28 +45,28 @@ svg {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
-.number_title{
+.number_title {
     margin-top: 10px;
     text-align: center;
     font-weight: bold;
     font-size: 18px;
-    width:100px;
+    width: 100px;
 }
 
-.reported_number{
+.reported_number {
     margin-top: 10px;
     padding: 10px;
     text-align: center;
     font-weight: bold;
     font-size: 18px;
     width: 100px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.param_title{
+.param_title {
     margin-top: 10px;
     text-align: center;
     font-weight: bold;
@@ -76,15 +74,15 @@ svg {
 }
 
 .sbs {
-    border-radius:5px;
+    border-radius: 5px;
     border-color: #dfdfdf;
     border-style: solid;
     border-width: 1px;
     margin: 5px 5px 5px 5px;
-    -moz-box-shadow:    inset 0px 5px 10px #dfdfdf;
+    -moz-box-shadow: inset 0px 5px 10px #dfdfdf;
     -webkit-box-shadow: inset 0px 5px 10px #dfdfdf;
-    box-shadow:         inset 0px 5px 10px #dfdfdf;
-    display:inline-block;
+    box-shadow: inset 0px 5px 10px #dfdfdf;
+    display: inline-block;
 }
 
 #plot_area {
@@ -95,75 +93,76 @@ svg {
     stroke: lightgrey;
     opacity: 0.7;
 }
+
 .grid path {
-      stroke-width: 0;
+    stroke-width: 0;
 }
+
 .scaler {
     margin: 3px;
     font-size: 10px;
-    padding:0px;
+    padding: 0px;
     width: 20px;
-    background-color:#FFFFFF;
-    border-radius:10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
     border: 1px solid;
     border-color: #dfdfdf;
-    -moz-box-shadow:    inset 0px -5px 10px #dfdfdf;
+    -moz-box-shadow: inset 0px -5px 10px #dfdfdf;
     -webkit-box-shadow: inset 0px -5px 10px #dfdfdf;
-    box-shadow:         inset 0px -5px 10px #dfdfdf;
+    box-shadow: inset 0px -5px 10px #dfdfdf;
 }
-
 
 .trigger {
     margin-left: 5px;
     font-size: 10px;
-    padding:0px;
+    padding: 0px;
     width: 100%;
-    background-color:#FFFFFF;
-    border-radius:10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
     border: 1px solid;
     border-color: #dfdfdf;
-    -moz-box-shadow:    inset 0px -5px 10px #dfdfdf;
+    -moz-box-shadow: inset 0px -5px 10px #dfdfdf;
     -webkit-box-shadow: inset 0px -5px 10px #dfdfdf;
-    box-shadow:         inset 0px -5px 10px #dfdfdf;
+    box-shadow: inset 0px -5px 10px #dfdfdf;
 }
 
-.trigger:active{
-    background-color:#00ff1e;
-    -moz-box-shadow:    inset 0px -5px 10px #207e2b;
+.trigger:active {
+    background-color: #00ff1e;
+    -moz-box-shadow: inset 0px -5px 10px #207e2b;
     -webkit-box-shadow: inset 0px -5px 10px #207e2b;
-    box-shadow:         inset 0px -5px 10px #207e2b;
+    box-shadow: inset 0px -5px 10px #207e2b;
 }
 
-.trigger:hover{
-    background-color:#dfdfdf;
-    -moz-box-shadow:    inset 0px -5px 10px #c5c5c5;
+.trigger:hover {
+    background-color: #dfdfdf;
+    -moz-box-shadow: inset 0px -5px 10px #c5c5c5;
     -webkit-box-shadow: inset 0px -5px 10px #c5c5c5;
-    box-shadow:         inset 0px -5px 10px #c5c5c5;
+    box-shadow: inset 0px -5px 10px #c5c5c5;
 }
-.trigger:focus{
+
+.trigger:focus {
     outline: 0;
 }
 
-
-
-.scaler:active{
-    background-color:#00ff1e;
-    -moz-box-shadow:    inset 0px -5px 10px #207e2b;
+.scaler:active {
+    background-color: #00ff1e;
+    -moz-box-shadow: inset 0px -5px 10px #207e2b;
     -webkit-box-shadow: inset 0px -5px 10px #207e2b;
-    box-shadow:         inset 0px -5px 10px #207e2b;
+    box-shadow: inset 0px -5px 10px #207e2b;
 }
 
-.scaler:hover{
-    background-color:#dfdfdf;
-    -moz-box-shadow:    inset 0px -5px 10px #c5c5c5;
+.scaler:hover {
+    background-color: #dfdfdf;
+    -moz-box-shadow: inset 0px -5px 10px #c5c5c5;
     -webkit-box-shadow: inset 0px -5px 10px #c5c5c5;
-    box-shadow:         inset 0px -5px 10px #c5c5c5;
+    box-shadow: inset 0px -5px 10px #c5c5c5;
 }
-.scaler:focus{
+
+.scaler:focus {
     outline: 0;
 }
 
-.v_button_container{
+.v_button_container {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -172,17 +171,17 @@ svg {
     justify-content: center;
 }
 
-.t_button_container{
+.t_button_container {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
-.h_button_container{
+.h_button_container {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -190,16 +189,16 @@ svg {
     justify-content: center;
     flex-direction: row;
     float: left;
-    vertical-align:middle;
+    vertical-align: middle;
 }
-
 
 .y_axis {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 60px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
 }
+
 .chart {
     position: relative;
     left: 0px;
@@ -224,6 +223,10 @@ svg {
     flex-direction: column;
 }
 
-.button_holder{
+.button_holder {
     width: 150px;
+}
+
+.gui_button {
+    text-shadow: none;
 }

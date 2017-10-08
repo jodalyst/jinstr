@@ -10,13 +10,6 @@
   <link rel="stylesheet" href="/src/css/gui.css">
 
 
-<!--   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-<script src="/static/socket.io.js"></script>
-  <script src="/static/pushbutton.js" ></script>
-  <link rel="stylesheet" href="/static/gui.css"> -->
   <title>Toggle Demo of Push Buttons</title>
 </head>
 <body>
@@ -30,8 +23,9 @@ var unique2 = 124;
 
 window.onload = function(){
     var socket = io('http://localhost:3000');
-    var pb1  = new PushButton("pos_1","Fire","Red","Black",unique1,socket);
-    var pb2 = new PushButton("pos_1","Cheer","Gray","Blue",unique2,socket);
+    var pb1  = new PushButton("pos_1",unique1,"Fire","Red","Black",socket);
+    var pb2 = new PushButton("pos_1",unique2,"Cheer","Gray","Blue",socket);
+    var pb3 = new PushButton("pos_1",unique2+1,"Extra",socket);
 }
 </script>
 </html>

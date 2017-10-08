@@ -60,7 +60,7 @@ elif async_mode == 'gevent':
     from gevent import monkey
     monkey.patch_all()
 
-    
+     
 #Start up Flask server:
 app = Flask(__name__, template_folder = './',static_folder='../../src')
 app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
