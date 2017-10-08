@@ -1,4 +1,4 @@
-function Pulldown(div_id,title,names,unique,socket=null){
+function Pulldown(div_id,unique,title,names,socket=null){
     var div_id = String(div_id);
     var title = String(title);
     var names = names; //should be 2-long array of values for when switch is low or high
@@ -22,7 +22,10 @@ function Pulldown(div_id,title,names,unique,socket=null){
     }
     setup();
     if (socket != null){
-        socket.on("update_"+unique,function(va){console.log("hit");if (built){$('#'+div_id+unique+"pulldown").val(va).selectmenu('refresh');}});
+        socket.on("update_"+unique,function(va){console.log("hit");
+            if (built){$('#'+div_id+unique+"pulldown").val(va).selectmenu('refresh');}
+
+        });
         $('#'+div_id+unique+"pulldown").on('change',function(){
             socket.emit('reporting', {'unique':unique, 'data':$(this).val()});
         });
