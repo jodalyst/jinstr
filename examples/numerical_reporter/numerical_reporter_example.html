@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  <script src="/src/js/socket.io.js"></script>
+  <script src="/src/js/numerical_reporter.js" ></script>
+  <link rel="stylesheet" href="/src/css/gui.css">
+
+
+  <title>Numerical Reporter Demo of in-Browser and Socket-Based Driving</title>
+</head>
+<body>
+<p>Numbers below are based on mouse position (clipped at cert</p>
+  <div id="pos_1"></div>
+<p>The modules should be responsive as shown below:
+  <div id="pos_2">
+  </div>
+</body>
+<script>
+
+var mouseX, mouseY;
+$(document).mousemove(function(e){
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+});
+
+var unique1 = 123;
+var unique2 = 124;
+var unique3 = 125;
+var unique4 = 126;
+
+var reporter_x;
+var reporter_y;
+var reporter_x2;
+var reporter_y2;
+
+window.onload = function(){
+    var socket = io('http://localhost:3000');
+    var reporter_x = new Numerical_Reporter("pos_1","X Position",[-100,500],"red","black", unique1);
+    var reporter_y = new Numerical_Reporter("pos_1","Y Position",[50,250],"yellow","blue", unique2);
+    var reporter_x2 = new Numerical_Reporter("pos_2","X Position",[,],"black","gray", unique3,4,socket);
+    var reporter_y2 = new Numerical_Reporter("pos_2","Y Position",[,],"orange","red", unique4,6,socket);
+
+    timer = setInterval(function(){
+        reporter_x.step(mouseX);
+        reporter_y.step(mouseY);
+        }, 50);
+}
+</script>
+<style>
+
+#pos_2{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    vertical-align:middle;
+}
+
+</html>
