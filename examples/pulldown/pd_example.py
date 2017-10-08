@@ -73,8 +73,8 @@ def dataThread():
     while True:
         time.sleep(0.02)
         count +=1
-        if count == 400:
-            socketio.emit('update_{}'.format(unique),55)
+        if count == 200:
+            socketio.emit('update_{}'.format(unique),{'title':'Null','options':[int(time.time()),int(time.time())+5,int(time.time())+10]})
             print('sending')
             count = 0
 
