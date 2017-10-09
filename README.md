@@ -69,16 +69,12 @@ plot.step([2,3]);
 
 ### `Time_Parallel`
 
+Similar to Time series but there are two flavors: Line and Bar.  
+
 ### `Numerical_Display`
 
 Bring in:
 
-```
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-<script src="./js/numerical_display.js" ></script>
-<link rel="stylesheet" href="./css/gui.css">
-```
 
 and with a body of :
 
@@ -118,6 +114,8 @@ function Numerical_Reporter(div_id,title,range,color,bg_color, unique, socket=nu
 
 
 ### `Toggle`
+
+Simple wrapper for a Toggle
 
 ### `Slider`
 
@@ -164,6 +162,10 @@ Things it needs:
     
     * X-Y Sensitivity (must have some sort of event it triggers)...need to think about how to generalize triggering of async events in general
     * Center-Return/Not-Center-Return Option
+
+## Module State
+
+Currently I'm working on allowing the saving of system state so that you can easily reload a page and all the slider settings as needed.  AS a result, all front-end modules in the page will be able to return their system state such as zoom levels, current slider values, etc...
 
 
 
