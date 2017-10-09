@@ -1,5 +1,6 @@
 # jinstr
-The New Development Repo for jinstrument
+
+Python/Javascript/HTML-based instrumentation/automation environment for local/remote system control and monitoring
 
 ## Directories: ##
 
@@ -7,11 +8,12 @@ The New Development Repo for jinstrument
     * **js:** Javascript source files (keep them separate for now)
     * **css:** CSS source files (keep them separate for now)
     * **python:** Python source files (keep them separate for now)
-* **examples:** Example html and Python pages for individual module demos
+* **examples:** Example html and Python pages for individual module demos (currently front-end focused, will add back-end examples eventually)
 
 
+## Front-End Modules ##
 
-## Modules ##
+Below are the front-end modules and their descriptions.
 
 ### `Time_Series` (needs updating) ###
 
