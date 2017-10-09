@@ -1,0 +1,144 @@
+from flask import Flask, render_template, session, request, make_response, json, jsonify, url_for
+from flask_socketio import SocketIO, emit, join_room, leave_room,close_room, rooms, disconnect
+import glob
+import os
+from random import randint
+from threading import Thread, Lock
+import time
+import serial
+import sys
+import struct
+import logging
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+async_mode = None
+if async_mode is None:
+    try:
+        import eventlet
+        async_mode = 'eventlet'
+    except ImportError:
+        pass
+
+    if async_mode is None:
+        try:
+            from gevent import monkey
+            async_mode = 'gevent'
+        except ImportError:
+            pass
+
+    if async_mode is None:
+        async_mode = 'threading'
+
+    print('async_mode is ' + async_mode)
+
+# monkey patching is necessary because this application uses a background
+# thread
+if async_mode == 'eventlet':
+    import eventlet
+    eventlet.monkey_patch()
+elif async_mode == 'gevent':
+    from gevent import monkey
+    monkey.patch_all()
+
+########################
+##                    ##
+##    SERVER STUFF    ##
+##                    ##
+########################
+
+
+#Start up Flask server:
+app = Flask(__name__, template_folder = './',static_url_path='/static')
+app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
+socketio = SocketIO(app, async_mode = async_mode)
+thread = None
+
+global identifiers
+
+def dataThread():
+    pass
+
+# Startup has occured
+@app.route('/')
+def index():
+    global thread
+    print ("A user connected")
+    if thread is None:
+        thread = Thread(target=dataThread)
+        thread.daemon = True
+        thread.start()
+    return render_template('main.html')
+
+
+# Return the configuration
+@app.route('/config', methods=['GET', 'POST'])
+def config():
+    if request.method == 'GET':
+        SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+        json_url = os.path.join(SITE_ROOT, "static/json/", "config.json")
+        checkJson(json_url)
+        config = json.load(open(json_url))
+        return jsonify(config)
+    elif request.method == 'POST':
+        print("can't really post anything yet, sorry...")
+    else:
+        print("Check your request method.")
+
+
+    # print(identifiers['ToneGenerator'])
+
+# Check and update identifiers in the json. plus other things
+def checkJson(json_url):
+    # Make global dictionary of ID's
+    global identifiers
+    identifiers = {}
+
+    # Open Json
+    with open(json_url, "r") as jsonFile:
+        config = json.load(jsonFile)
+
+    # Function to generate new unique identifier
+    def newUnique(n):
+        range_start = 10**(n-1)
+        range_end = (10**n)-1
+        return randint(range_start, range_end)
+
+    # List to store existing unique values
+    uniques = []
+    # Open up modules portion of config.json
+    modules = config[1]['modules']
+    for module in modules:
+        for instance in module:
+            for item in module[instance]:
+                # Check if module already has unique identifer
+                if 'unique' in item:
+                    # Appends existing identifier to uniques
+                    uniques.append(item['unique'])
+                else:
+                    # Generates new unique identifier
+                    unique = newUnique(3)
+                    # Checks if identifier hasn't already been used
+                    if unique not in uniques:
+                        # Assings identifier for that module
+                        item['unique'] = unique
+                identifiers[item['name']] = item['unique']
+
+    # Write modified json file
+    with open(json_url, "w") as jsonFile:
+        # Complicated dump so that everytime we modify the json it isn't minified
+        json.dump(config, jsonFile, sort_keys=True,indent=2,separators=(',',': '))
+
+# Universal announcer
+@socketio.on('reporting')
+def announce(content):
+    # Capture variables
+    unique = content['unique']
+    div = content['div']
+    data = content['data']
+    # Send variables
+    socketio.emit("announce_{}".format(unique),data=(unique,div,data))
+
+if __name__ == '__main__' or __name__ == 'server':
+    socketio.run(app, port=3000, debug=True)

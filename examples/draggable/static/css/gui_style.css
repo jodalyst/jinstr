@@ -1,0 +1,281 @@
+// * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial;
+     padding: 50px;
+     margin-top:0px;
+     margin-left:30px;
+     margin-right:0px;
+     }
+    .containing-element .ui-slider-switch { width: 15em }
+    svg {
+        font: 10px sans-serif;
+    }
+    .line {
+        fill: none;
+        stroke-width: 1.5px;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+/* Deals with plots */
+
+.plot_title{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+}
+.param_title{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.sbs {
+    border-radius:5px;
+    border-color: #dfdfdf;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px 5px 5px 5px;
+    -moz-box-shadow:    inset 0px 5px 10px #dfdfdf;
+    -webkit-box-shadow: inset 0px 5px 10px #dfdfdf;
+    box-shadow:         inset 0px 5px 10px #dfdfdf;
+    display:inline-block;
+}
+#plot_area {
+    text-align: center;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.grid path {
+      stroke-width: 0;
+}
+.scaler {
+    margin-left: 5px;
+    font-size: 10px;
+    padding:0px;
+    width: 20px;
+    background-color:#FFFFFF;
+    border-radius:10px;
+    border: 1px solid;
+    border-color: #dfdfdf;
+    -moz-box-shadow:    inset 0px -5px 10px #dfdfdf;
+    -webkit-box-shadow: inset 0px -5px 10px #dfdfdf;
+    box-shadow:         inset 0px -5px 10px #dfdfdf;
+}
+.scaler:active{
+    background-color:#00ff1e;
+    -moz-box-shadow:    inset 0px -5px 10px #207e2b;
+    -webkit-box-shadow: inset 0px -5px 10px #207e2b;
+    box-shadow:         inset 0px -5px 10px #207e2b;
+}
+
+.scaler:hover{
+    background-color:#dfdfdf;
+    -moz-box-shadow:    inset 0px -5px 10px #c5c5c5;
+    -webkit-box-shadow: inset 0px -5px 10px #c5c5c5;
+    box-shadow:         inset 0px -5px 10px #c5c5c5;
+}
+.scaler:focus{
+    outline: 0;
+}
+
+.v_button_container{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/*.v_button_container{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    display: inline-block;
+    float: left;
+    vertical-align:middle;
+}*/
+
+/*.button_container{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}*/
+
+.y_axis {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+}
+.chart {
+    position: relative;
+    left: 0px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.scalerp {
+    margin-left: 5px;
+    font-size: 10px;
+    padding:0px;
+    width: 20px;
+    background-color:#FFFFFF;
+    border-radius:10px;
+    border: 1px solid;
+    border-color: #dfdfdf;
+    -moz-box-shadow:    inset 0px -5px 10px #dfdfdf;
+    -webkit-box-shadow: inset 0px -5px 10px #dfdfdf;
+    box-shadow:         inset 0px -5px 10px #dfdfdf;
+}
+.scalerp:active{
+    background-color:#00ff1e;
+    -moz-box-shadow:    inset 0px -5px 10px #207e2b;
+    -webkit-box-shadow: inset 0px -5px 10px #207e2b;
+    box-shadow:         inset 0px -5px 10px #207e2b;
+}
+
+.scalerp:hover{
+    background-color:#dfdfdf;
+    -moz-box-shadow:    inset 0px -5px 10px #c5c5c5;
+    -webkit-box-shadow: inset 0px -5px 10px #c5c5c5;
+    box-shadow:         inset 0px -5px 10px #c5c5c5;
+}
+.scalerp:focus{
+    outline: 0;
+}
+
+/* Deals with #drag_container */
+
+#drag_container {
+  border: 1px dashed #CCC;
+  position: relative;
+  width: 100%;
+}
+
+#drag_container > div {
+  position: absolute;
+}
+
+#drag_container > .ss-placeholder-child {
+  background: transparent;
+  border: 1px dashed blue;
+}
+
+/* Deals with prestaging container */
+
+.prestaging-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+/* Deals with toggles */
+
+.toggle_holder > div {
+    display: inline-block;
+    background-color: red;
+}
+
+/* Deals with sliders */
+
+.slider-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    display: inline-block;
+}
+
+.slider-item {
+    vertical-align: center;
+}
+
+label.slider-item {
+    margin: 0;
+}
+
+.slider-container > div > div > div {
+    width: 200px;
+}
+
+div.slider-item {
+    margin-top: 0;
+}
+
+/* Deals with timeplots */
+
+.timeplot-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    display: inline-block;
+    flex-direction: row;
+}
+
+.timeplot-item {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+/* Deals with autopilots */
+
+.autopilot-container {
+    width: 250px;
+    padding: 10px;
+    border: 3px solid #333333;
+    border-radius: 10px;
+}
+
+/*Deals with draggables*/
+
+.draggable {
+    padding: 0.5em;
+}
+
+.custom-size-toggle.ui-toggle {
+    width: 1px;
+}
+
+/*Deals with joysticks*/
+
+.joystick-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    display: inline-block;
+    flex-direction: row;
+}
+
+.joystick-item {
+    align-items: center;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}

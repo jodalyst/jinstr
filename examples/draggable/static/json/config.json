@@ -1,0 +1,92 @@
+[
+  {
+    "configuration": [
+      {
+        "baud": 115200
+      }
+    ]
+  },
+  {
+    "modules": [
+      {
+        "slider": [
+          {
+            "high": 1000,
+            "low": -1000,
+            "name": "ToneGenerator",
+            "resolution": 1,
+            "unique": 104
+          },
+          {
+            "high": 200,
+            "low": -200,
+            "name": "Joe",
+            "resolution": 1,
+            "unique": 618
+          },
+          {
+            "high": 200,
+            "low": -200,
+            "name": "Jesus",
+            "resolution": 1,
+            "unique": 251
+          },
+          {
+            "high": 200,
+            "low": -200,
+            "name": "Juan",
+            "resolution": 1,
+            "unique": 486
+          }
+        ]
+      },
+      {
+        "timeseries": [
+          {
+            "color": "green",
+            "high": 10,
+            "low": 0,
+            "name": "dB",
+            "unique": 310
+          }
+        ]
+      },
+      {
+        "parallel": [
+          {
+            "color": "red",
+            "graph_type": "line",
+            "high": 10000,
+            "label_names": "jesus,estalit",
+            "low": -100,
+            "name": "FFT",
+            "type": "P",
+            "unique": 543
+          },
+          {
+            "color": "green",
+            "graph_type": "line",
+            "high": 10000,
+            "label_names": "jesus,amen,hahaha",
+            "low": -100,
+            "name": "AveragedFFT",
+            "type": "P",
+            "unique": 134
+          }
+        ]
+      },
+      {
+        "pushbutton": [
+          {
+            "bg_color": "pink",
+            "color": "green",
+            "div_id": "Test",
+            "label": "Um",
+            "name": "Test",
+            "unique": 784
+          }
+        ]
+      }
+    ]
+  }
+]
