@@ -7,20 +7,45 @@ function Toggle(div_id,title,names,unique,socket=null){
     var socket = socket;
     var built = false;
     var setup = function(){
-        $("#"+div_id).append("<div class ='toggle_holder' id=\""+div_id+unique+"_holder\"></div>");
-        $("#"+div_id+unique+"_holder").append("<label for =\"" + div_id+unique+"toggler"+"\">"+title+": </label>");
-        $("#"+div_id+unique+"_holder").append("<select name=\""+ div_id+unique+"toggler" +"\" id=\""+div_id+unique+"toggle"+"\" data-role=\"slider\"><option value=\""+names[0]+"\">"+names[0]+"</option><option value=\""+names[1]+"\">"+names[1]+" </option></select>");
-        //$("#"+div_id+unique+"_holder").append('<label for="slider-1">Input slider:</label><input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />');
+        var overall_div = document.getElementById(div_id);
+        var holder = document.createElement('div');
+        holder.setAttribute("id", div_id+unique+"_holder");
+        holder.setAttribute("class", "toggle_holder");
+        overall_div.appendChild(holder);
+        var slider = document.createElement('div');
+        holder.setAttribute("class", "toggle");
+        holder.appendChild(slider);
+        //$("#"+div_id).append("<div class ='toggle_holder' id=\""+div_id+unique+"_holder\"></div>");
+        //$("#"+div_id+unique+"_holder").append("<label for =\"" + div_id+unique+"toggler"+"\">"+title+": </label>");
+        //$("#"+div_id+unique+"_holder").append("<select name=\""+ div_id+unique+"toggler" +"\" id=\""+div_id+unique+"toggle"+"\" data-role=\"slider\"><option value=\""+names[0]+"\">"+names[0]+"</option><option value=\""+names[1]+"\">"+names[1]+" </option></select>");
         built = true;
-        $("#"+div_id+unique+"_holder").trigger("create");
-        console.log("#"+div_id+unique+"toggle");
+        //$("#"+div_id+unique+"_holder").trigger("create");
+        noUiSlider.create(slider, {
+            orientation: "vertical",
+            start: 0,
+            range: {
+                'min': [0, 1],
+                'max': 1
+            },
+            format: wNumb({
+                decimals: 0
+            })
+        })
+        
+        slider.noUiSlider.on('update', function( values, handle ){
+            if ( values[handle] === '1' ) {
+                slider.classList.add('off');
+            } else {
+                slider.classList.remove('off');
+            }
+            if (socket != null){
+                console.log('reporting', {'unique':unique, 'data':slider.noUiSlider.get()});
+                socket.emit('reporting', {'unique':unique, 'data':slider.noUiSlider.get()});
+            }
+        });
     }
     setup();
     if (socket != null){
-        socket.on("update_"+unique,function(va){console.log("hit");if (built){$('#'+div_id+unique+"toggle").val(va).slider('refresh');}});
-        $('#'+div_id+unique+"toggle").on('change',function(){
-            console.log('reporting', {'unique':unique, 'data':$(this).val()});
-            socket.emit('reporting', {'unique':unique, 'data':$(this).val()});
-        });
+        socket.on("update_"+unique,function(va){console.log("hit");if (built){slider.noUiSlider.set(va);}});
     };
 };
