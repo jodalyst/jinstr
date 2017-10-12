@@ -172,3 +172,9 @@ Currently I'm working on allowing the saving of system state so that you can eas
 ##Important!!
 
 A copy of `socket.io.js` from <a href="https://github.com/socketio/socket.io-client" target="_blank">here</a> is being used for local development.
+
+##Other libraries:
+
+* Currently we're using <a href="https://refreshless.com/nouislider/download/" target="_blank">the no ui slider</a>
+* Also we're using <a href="https://packery.metafizzy.co/" target="_blank">Packery</a> 
+* <a href="https://draggabilly.desandro.com/" target="_blank">Draggability</a> as well
