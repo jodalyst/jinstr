@@ -73,9 +73,12 @@ def dataThread():
     while True:
         time.sleep(0.02)
         count +=1
+        if count == 200:
+            socketio.emit("update_{}".format(unique),0)
+            print("sending 0");
         if count == 400:
-            socketio.emit('update_{}'.format(unique),'Blue')
-            print('sending')
+            socketio.emit('update_{}'.format(unique),1)
+            print('sending 1')
             count = 0
 
 @app.route('/')

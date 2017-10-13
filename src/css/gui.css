@@ -231,11 +231,21 @@ svg {
     text-shadow: none;
 }
 
-.toggle {
-    height: 50px;
+.toggle{
+  width: 100px;
+  margin: 2px;
 }
 
-.toggle.off .noUi-handle {
-    border-color: red;
+.toggle_title {
+    margin-top: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
 }
+.toggle_value {
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
 
