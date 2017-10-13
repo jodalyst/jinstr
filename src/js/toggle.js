@@ -6,46 +6,63 @@ function Toggle(div_id,title,names,unique,socket=null){
     var unique = String(unique); //unique identifying number
     var socket = socket;
     var built = false;
+    var title;
+    var slider;
+    var holder;
+    var slider_input;
+    var value;
+    var label;
     var setup = function(){
         var overall_div = document.getElementById(div_id);
-        var holder = document.createElement('div');
+        holder = document.createElement('div');
         holder.setAttribute("id", div_id+unique+"_holder");
         holder.setAttribute("class", "toggle_holder");
         overall_div.appendChild(holder);
-        var slider = document.createElement('div');
+        title = document.createElement('div');
+        value = document.createElement('div');
+        title.setAttribute("id",div_id+unique+"_title");
+        value.setAttribute("id",div_id+unique+"_value");
+        title.setAttribute("class","toggle_title");
+        value.setAttribute("class","toggle_val");
+        slider = document.createElement('div');
+        slider.setAttribute("class","ckbx-style-8");
+        slider_input = document.createElement('input');
+        slider_input.setAttribute("type","checkbox");
+        slider_input.setAttribute("name",div_id+unique+"_checkbox");
+        slider_input.setAttribute("id","ckbx-style-8-1");
+        slider_input.setAttribute("value",1);
+        slider_input.setAttribute("name", div_id+unique+"_checkbox");
+        
+        label = document.createElement("label");
+        label.setAttribute("for","ckbx-style-8-1"); 
         holder.setAttribute("class", "toggle");
         holder.appendChild(slider);
-        //$("#"+div_id).append("<div class ='toggle_holder' id=\""+div_id+unique+"_holder\"></div>");
-        //$("#"+div_id+unique+"_holder").append("<label for =\"" + div_id+unique+"toggler"+"\">"+title+": </label>");
-        //$("#"+div_id+unique+"_holder").append("<select name=\""+ div_id+unique+"toggler" +"\" id=\""+div_id+unique+"toggle"+"\" data-role=\"slider\"><option value=\""+names[0]+"\">"+names[0]+"</option><option value=\""+names[1]+"\">"+names[1]+" </option></select>");
+        slider.appendChild(title);
+        slider.appendChild(value);
+        slider.appendChild(slider_input);
+        slider.appendChild(label);
         built = true;
-        //$("#"+div_id+unique+"_holder").trigger("create");
-        noUiSlider.create(slider, {
-            orientation: "vertical",
-            start: 0,
-            range: {
-                'min': [0, 1],
-                'max': 1
-            },
-            format: wNumb({
-                decimals: 0
-            })
-        })
-        
-        slider.noUiSlider.on('update', function( values, handle ){
-            if ( values[handle] === '1' ) {
-                slider.classList.add('off');
-            } else {
-                slider.classList.remove('off');
-            }
-            if (socket != null){
-                console.log('reporting', {'unique':unique, 'data':slider.noUiSlider.get()});
-                socket.emit('reporting', {'unique':unique, 'data':slider.noUiSlider.get()});
-            }
-        });
+         
     }
     setup();
+    var checko = function(element){
+        if (element.checked){
+            console.log("on");
+        }else{
+            console.log("off");
+        }
+        if (socket != null){
+            console.log('reporting', {'unique':unique, 'data':slider_input.checked});
+            socket.emit('reporting', {'unique':unique, 'data':slider_input.checked});
+        }
+    }     
+    window.onload = function() {
+        var input = document.getElementsByName(div_id+unique+"_checkbox");
+        if (input) {   
+            input.addEventListener('change', checko, false);
+        }
+    }
     if (socket != null){
-        socket.on("update_"+unique,function(va){console.log("hit");if (built){slider.noUiSlider.set(va);}});
+        socket.on("update_"+unique,function(va){console.log("hit");if (built){slider_input.checked=va?true:false;}});
     };
 };
