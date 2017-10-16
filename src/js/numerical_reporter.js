@@ -16,17 +16,30 @@ function Numerical_Reporter(div_id,title,range,color,bg_color,unique,precision=n
             return value.toPrecision(precision);
         }
 
-    } 
-    $("#"+div_id).append("<div class ='number_holder' id=\""+div_id+unique+"_holder\"></div>");
-    $("#"+div_id+unique+"_holder").append("<div class ='number_title' id=\""+div_id+unique+"_title\">"+title+"</div>");
-    $("#"+div_id+unique+"_holder").append("<div class ='reported_number' style=\"color:"+ color+";background-color:"+bg_color+";\" id=\""+div_id+unique+"_number\">"+format(value)+"</div>");
+    }
+    var overall_div = document.getElementById(div_id);
+    var holder = document.createElement('div');
+    holder.setAttribute("id", div_id+unique+"_holder");
+    holder.setAttribute("class", "number_holder");
+    var title_disp = document.createElement('div');
+    title_disp.setAttribute("id",div_id+unique+"_title");
+    title_disp.setAttribute("class","number_title");
+    title_disp.innerHTML=title;
+    holder.appendChild(title_disp);
+    overall_div.appendChild(holder);
+    var reported = document.createElement('div');
+    reported.setAttribute('class','reported_number');
+    reported.setAttribute('style',"color:"+ color+";background-color:"+bg_color+";");
+    reported.setAttribute('id',div_id+unique+"_number");
+    reported.innerHTML = format(value);
+    holder.appendChild(reported);
     this.step = function(value){ 
         if (range[1] != null && value> range[1]){
             value = range[1];
         }else if (range[0] != null && value <range[0]){
             value= range[0];
         }
-        $("#"+div_id+unique+"_number").html(format(value));
+        reported.innerHTML = format(value)
     };
     var steppo = this.step;
     if (socket != null){

@@ -104,6 +104,8 @@ reporter_y.step(Math.random());
 function Numerical_Reporter(div_id,title,range,color,bg_color, unique, socket=null){
 ```
 
+10/15/2017 Update: No longer uses jquery (pure vanilla JS)
+
 * `div_id`: The DOM div where you want the thing to live
 * `title`: The title you'd like to show up for your plot
 * `range`: If you'd like to limit the displayed numerical range use this. It needs an array of `[low_limit,high_limit]`.  If you'd like to avoid using this, specify a `range` of `[,]`
@@ -115,7 +117,20 @@ function Numerical_Reporter(div_id,title,range,color,bg_color, unique, socket=nu
 
 ### `Toggle`
 
-Simple wrapper for a Toggle
+10/15/2017 Update: No longer uses jquery (pure vanilla JS)
+
+```
+function Toggle(div_id,title,names,unique,socket=null)
+```
+
+* `div_id`: The DOM where you want the thing to live
+* `title`: The title of the toggle you'd like to see
+* `names`: A two-long array specifying the "0" and "1" terms for the switch, respectively
+* `unique`: The unique (for the page) identifying alphanumeric term used by the element
+* `socket`: A Websocket object (`socket.io.js`)
+
+
+
 
 ### `Slider`
 

@@ -3,9 +3,6 @@
 <head>
 
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
   <script src="/src/js/socket.io.js"></script>
   <script src="/src/js/numerical_reporter.js" ></script>
   <link rel="stylesheet" href="/src/css/gui.css">
@@ -23,10 +20,10 @@
 <script>
 
 var mouseX, mouseY;
-$(document).mousemove(function(e){
+document.onmousemove = function(e){
         mouseX = e.pageX;
         mouseY = e.pageY;
-});
+};
 
 var unique1 = 123;
 var unique2 = 124;
