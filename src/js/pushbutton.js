@@ -6,31 +6,43 @@ function PushButton(div_id,unique,label,color=null,bg_color=null,socket=null){
     var value; //holds toggle value right now
     var unique = String(unique); //unique identifying number
     var socket = socket;
+    var overall_div = document.getElementById(div_id);
+    var holder;
+    var button_element;
     var setup = function(){
-        $("#"+div_id).append("<div class ='button_holder' id=\""+div_id+unique+"_holder\"></div>");
+        holder = document.createElement("div");
+        holder.setAttribute("id", div_id+unique+"_holder");
+        holder.setAttribute("class", "button_holder");
+        overall_div.appendChild(holder);
+        button_element = document.createElement("button");
+        button_element.setAttribute("class","gui_button");
+        button_element.setAttribute("id",div_id+unique+"button");
+        button_element.innerHTML = label;
+        holder.appendChild(button_element);
+           
         if (bg_color===null || color===null){
-            $("#"+div_id+unique+"_holder").append("<button class=\"ui-button gui_button\" id=\""+ div_id+unique+"button" +"\">"+label+"</button>");
+            console.log("no color");
         }else{
-            $("#"+div_id+unique+"_holder").append("<button class=\"ui-button gui_button\" id=\""+ div_id+unique+"button" +"\" style=\"background-color:" + bg_color+";color: " + color +"\">"+label+"</button>");
+            button_element.setAttribute("style","background-color:"+bg_color+";color: "+color);
         }
-        $("#"+div_id+unique+"_holder").trigger("create");
+        //$("#"+div_id+unique+"_holder").trigger("create");
     }
     setup();
+
     if (socket != null){
-        $('#'+div_id+unique+"button").on('click',function(){
+        button_element.addEventListener("click",function(){
             console.log("PUSH");
             socket.emit('reporting', {'unique':unique, 'data':"Push"});
         });
         //off(clicking not working...is fine for now')
-        $('#'+div_id+unique+"button").off('click',function(){
+        button_element.addEventListener('unclick',function(){
             console.log("UNPUSH");
             socket.emit('reporting', {'unique':unique, 'data':"Unpush"});
         });
         socket.on("update_"+unique,function(val){
-            var element = document.getElementById(div_id+unique+"button");
-            element.style.backgroundColor = val['bgcolor'];
-            element.style.color = val['color'];
-            element.innerHTML = val['text'];
+            button_element.style.backgroundColor = val['bgcolor'];
+            button_element.style.color = val['color'];
+            button_element.innerHTML = val['text'];
             console.log(val)
 
 
