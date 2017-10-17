@@ -6,28 +6,54 @@ function Pulldown(div_id,unique,title,names,socket=null){
     var unique = String(unique); //unique identifying number
     var socket = socket;
     var built = false;
+    var holder; //div containing title, value, and pullldown
+    var overall_div = document.getElementById(div_id);
+    var title_disp; //title of module
+    var pulldowner;
+    var options = [];
     var setup = function(){
-        $("#"+div_id).append("<div class ='toggle_holder ui-field-contain' id=\""+div_id+unique+"_holder\"></div>");
-        $("#"+div_id+unique+"_holder").append("<label for =\"" + div_id+unique+"pulldowner"+"\">"+title+": </label>");
-        var build_string = "<select name=\""+ div_id+unique+"pulldowner" +"\" id=\""+div_id+unique+"pulldown"+"\">";
+        holder = document.createElement('div');
+        overall_div.appendChild(holder);
+        holder.setAttribute("id", div_id+unique+"_holder");
+        holder.setAttribute("class", "pd_holder");
+        pulldowner = document.createElement('select');
+        pulldowner.setAttribute('name',div_id+unique+"pulldowner");
+        pulldowner.setAttribute('id',div_id+unique+"pulldown");     
+        title_disp = document.createElement('div');
+        title_disp.setAttribute("id",div_id+unique+"_title");
+        title_disp.setAttribute("class","pd_title");
+        title_disp.innerHTML=title;
         for (var i=0; i<names.length; i++){
-            build_string+="<option value=\""+names[i]+"\">"+names[i]+"</option>";
+            options.push(document.createElement('option'));
+            options[i].setAttribute('value',names[i]);
+            options[i].innerHTML = names[i];
+            pulldowner.appendChild(options[i]);
         }
-        build_string+="</select>";
-        $("#"+div_id+unique+"_holder").append(build_string);
-        //$("#"+div_id+unique+"_holder").append("<select name=\""+ div_id+unique+"pulldowner" +"\" id=\""+div_id+unique+"pulldown"+"\"><option value=\""+names[0]+"\">"+names[0]+"</option><option value=\""+names[1]+"\">"+names[1]+" </option></select>");
-        //$("#"+div_id+unique+"_holder").append('<label for="slider-1">Input slider:</label><input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />');
+        holder.appendChild(title_disp);
+        holder.appendChild(pulldowner);
         built = true;
-        $("#"+div_id+unique+"_holder").trigger("create");
+        //$("#"+div_id+unique+"_holder").trigger("create");
     }
     setup();
     if (socket != null){
         socket.on("update_"+unique,function(va){console.log("hit");
-            if (built){$('#'+div_id+unique+"pulldown").val(va).selectmenu('refresh');}
+            if (built){
+                for (var i=0; i<options.length; i++){
+                    pulldowner.removeChild(options[i]);
+                }
+                options = [];
+                for (var i=0; i<va['options'].length; i++){
+                    options.push(document.createElement('option')); 
+                    options[i].setAttribute('value',va['options'][i]);
+                    options[i].innerHTML = va['options'][i];
+                    pulldowner.appendChild(options[i]); 
+                }
+            } 
 
         });
-        $('#'+div_id+unique+"pulldown").on('change',function(){
-            socket.emit('reporting', {'unique':unique, 'data':$(this).val()});
+
+        pulldowner.addEventListener('change',function(){
+            socket.emit('reporting', {'unique':unique, 'data':pulldowner.value});
         });
     };
 };
