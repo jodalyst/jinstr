@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
 <head>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="../../src/js/packery.pkgd.min.js"></script>
 <script src="../../src/js/draggabilly.pkgd.min.js"></script>
-<script src="../../src/js/nouislider.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="../../src/css/nouislider.min.css">
 <link rel="stylesheet" type="text/css" href="../../src/css/checkboxes.min.css">
+<link rel="stylesheet" type="text/css" href="../../src/css/gui.css">
+<script src="../../src/js/draggable.js"></script>
 
-<link rel="stylesheet" type="text/css" href="./base.css">
-	<script src="../../src/js/draggable.js"></script>
-
+<script src="../../src/js/socket.io.js"></script>
+<script src="../../src/js/time_series.js" ></script>
 
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
@@ -32,7 +32,7 @@
                         <label for="ckbx-style-1-1"></label>
                     </div></div>
   <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
+  <div class="grid-item" id="plotbox"></div>
   <div class="grid-item"></div>
   <div class="grid-item grid-item--width2 grid-item--height2"></div>
   <div class="grid-item grid-item--width2"></div>
@@ -50,6 +50,28 @@
   <div class="grid-item"></div>
 </div>
 
+
+<script>
+var mouseX, mouseY;
+document.addEventListener("mousemove",function(e){
+        console.log(e);
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+});
+
+var PLOT_HEIGHT = 200;
+var PLOT_WIDTH = 300;
+var plot;
+var plot2;
+window.onload = function(){
+    var unique = 456;
+    //plot = new Time_Series("plotbox",'Sine Waves',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],2,["green","yellow"],unique,socket);
+    plot2 = new Time_Series("plotbox",'Mouse Moves',PLOT_WIDTH, PLOT_HEIGHT,60,[0,1000],2,["red","blue"],unique+1);
+    timer = setInterval(function(){
+        plot2.step([[mouseX],[mouseY]]);
+    }, 10);
+}
+</script>
 
 
 </body>
