@@ -270,7 +270,7 @@ svg {
 .grid {
   /*background: #DDD;*/
   max-width: 1200px;
-  boder: 2px inset;
+  border: 2px inset;
 
 }
 
@@ -288,7 +288,8 @@ svg {
   /*width: 100px;
   height: 100px;
   background: #999;*/
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  border: 2px solid;
+  border-color: gray;
   padding: 10px;
 }
 
