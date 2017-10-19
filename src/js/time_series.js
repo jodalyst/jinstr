@@ -106,15 +106,11 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     BC2.appendChild(vp);
     BC2.appendChild(vrs);
     BC2.appendChild(vm);
-    //$("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VP\">Z+</button>");
-    //$("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VRS\">RS</button>");
-    //$("#"+div_id+unique+"BC2").append("<button class='scaler' id=\""+div_id+unique+"VM\">Z-</button>");
     
     var BC1 = document.createElement('div');
     BC1.setAttribute("id", div_id+unique+"BC1");
     BC1.setAttribute("class", "v_button_container");
     top_row.insertBefore(BC1,top_row.firstChild); 
-    //$("#"+div_id+unique+"top").prepend("<div class ='v_button_container' id = \""+div_id+unique+"BC1\" >");
     var op = document.createElement('button');
     op.setAttribute("id",div_id+unique+"OI");
     op.setAttribute('class','scaler');
@@ -124,13 +120,10 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     oi.setAttribute('class','scaler');
     oi.innerHTML = 'O-';
     BC1.appendChild(oi);
-    //$("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OI\">O+</button>");
-    //$("#"+div_id+unique+"BC1").append("<button class='scaler' id=\""+div_id+unique+"OD\">O-</button>");
     var BC4 = document.createElement('div');
     BC4.setAttribute("id", div_id+unique+"BC4");
     BC4.setAttribute("class", "h_button_container");
     bottom_row.appendChild(BC4);
-    //$("#"+div_id+unique+"bot").append("<div class ='h_button_container' id = \""+div_id+unique+"BC4\" >");
     var hm = document.createElement('button');
     hm.setAttribute("id",div_id+unique+"HM");
     hm.setAttribute('class','scaler');
@@ -146,11 +139,7 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     BC4.appendChild(hm);
     BC4.appendChild(hrs);
     BC4.appendChild(hp);
-    //$("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HM\">Z-</button>");
-    //$("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HRS\">RS</button>");
-    //$("#"+div_id+unique+"BC4").append("<button class='scaler' id=\""+div_id+unique+"HP\">Z+</button>");
     this.step = function(values){
-            //this.trace.attr("d",this.line).attr("transform",null).transition().duration(0).ease("linear").attr("transform","translate("+this.x(-1)+",0)");
             for (var i=0; i<values.length; i++){
                 traces[i].attr("d",line).attr("transform",null);
                 for (var j=0; j<values[i].length;j++){

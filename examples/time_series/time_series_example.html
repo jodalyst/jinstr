@@ -18,17 +18,16 @@
 </body>
 
 <script>
-var mouseX, mouseY;
+var mouseX=0;
+var mouseY=0;
 document.addEventListener("mousemove",function(e){
-        console.log(e);
         mouseX = e.pageX;
         mouseY = e.pageY;
 });
-/*$(document).mousemove(function(e){
-        mouseX = e.pageX;
-        mouseY = e.pageY;
-});
-*/
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
+}
 
 var PLOT_HEIGHT = 200;
 var PLOT_WIDTH = 300;
@@ -40,7 +39,7 @@ window.onload = function(){
     plot = new Time_Series("plotbox",'Sine Waves',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],2,["green","yellow"],unique,socket);
     plot2 = new Time_Series("plotbox",'Mouse Moves',PLOT_WIDTH, PLOT_HEIGHT,60,[0,1000],2,["red","blue"],unique+1);
     timer = setInterval(function(){
-        plot2.step([[mouseX],[mouseY]]);
+        plot2.step([[Number(mouseX)],[Number(mouseY)]]);
     }, 10);
 }
 </script>

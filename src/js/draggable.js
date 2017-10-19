@@ -1,5 +1,7 @@
 // external js: packery.pkgd.js, draggabilly.pkgd.js
+
 document.addEventListener("DOMContentLoaded", function(){
+//document.addEventListener("load", function(){
 
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 
@@ -8,6 +10,8 @@ var pckry = new Packery( '.grid', {
   columnWidth: 100
 });
 
+
+document.addEventListener("DOMContentLoaded", function(){
 // collection of Draggabillies
 pckry.getItemElements().forEach( function( itemElem ) {
   var draggie = new Draggabilly( itemElem );
@@ -39,5 +43,4 @@ function LockToggle() {
       console.log('unchecked');
     }*/
   }
-
 
