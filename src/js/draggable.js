@@ -7,7 +7,7 @@ window.addEventListener("load", function(){
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 pckry = new Packery( '.cp', {
   itemSelector: '.cp-item',
-  columnWidth: 10
+  columnWidth: 1
 });
 // collection of Draggabillies
 pckry.getItemElements().forEach( function( itemElem ) {

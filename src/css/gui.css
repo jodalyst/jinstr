@@ -288,13 +288,18 @@ svg {
 }
 
 .gui_button:hover {
-  -webkit-filter: brightness(50%);
-}
+  /*-webkit-filter: brightness(50%);*/
 
-.gui_button:click {
   -webkit-filter:invert(100%);
 }
 
+.gui_button:after {
+  -webkit-filter:invert(0%);
+}
+
+.gui_button:active:after {
+  -webkit-filter:invert(100%);
+}
 
 
 
