@@ -234,9 +234,6 @@ svg {
     width: 150px;
 }
 
-.gui_button {
-    text-shadow: none;
-}
 
 .toggle{
     display: -ms-flexbox;
@@ -292,6 +289,10 @@ svg {
 
 .gui_button:hover {
   -webkit-filter: brightness(50%);
+}
+
+.gui_button:click {
+  -webkit-filter:invert(100%);
 }
 
 
