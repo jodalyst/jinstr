@@ -224,6 +224,13 @@ svg {
 }
 
 .button_holder {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: middle;
     width: 150px;
 }
 
@@ -232,19 +239,26 @@ svg {
 }
 
 .toggle{
-  width: 100px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: middle;
+  /*width: 100px;*/
   margin: 2px;
 }
 
 .toggle_title {
     margin-top: 10px;
-    text-align: left;
+    /*text-align: left;*/
     font-weight: bold;
     font-size: 18px;
 }
 .toggle_value {
     margin-top: 10px;
-    text-align: left;
+    /*text-align: left;*/
     font-size: 14px;
 }
 
@@ -258,6 +272,26 @@ svg {
 .pd_holder {
   margin: 5px;
 
+}
+
+
+.gui_button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.gui_button:hover {
+  -webkit-filter: brightness(50%);
 }
 
 

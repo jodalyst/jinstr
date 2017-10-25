@@ -28,11 +28,6 @@
 </div>
 
 <div class="cp">
-  <div class="cp-item grid-item--width2">
-  <div class="ckbx-style-1">
-                        <input type="checkbox" id="ckbx-style-1-1" value="0" name="ckbx-style-1">
-                        <label for="ckbx-style-1-1"></label>
-                    </div></div>
   <div class="cp-item" id="plotbox"></div>
   <div class="cp-item" id="plotbox2"></div>
   <div class="cp-item" id="num1"></div>
@@ -75,6 +70,7 @@ window.onload = function(){
     pb1  = new PushButton("toggle1",123123,"Fire","Red","Black");
     pb2 = new PushButton("toggle1",111,"Cheer","Gray","Blue");
     toggle_1 = new Toggle("num1","X Position",["Red","Blue"],'asdf')
+    toggle_2 = new Toggle("num2","Cycle",["Steady","Alternate"],'asdfgg')
     pb3 = new PushButton("num1",unique+3,"Extra",socket);
     reporter_x = new Numerical_Reporter("num1","X Position",[-100,500],"red","black", 13);
     reporter_y = new Numerical_Reporter("toggle2","Y Position",[50,250],"yellow","blue", 14);
