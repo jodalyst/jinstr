@@ -1,17 +1,14 @@
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 
-document.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("load", function(){
+    console.log("event!");
 //document.addEventListener("load", function(){
 
 // external js: packery.pkgd.js, draggabilly.pkgd.js
-
-var pckry = new Packery( '.grid', {
-  itemSelector: '.grid-item',
+pckry = new Packery( '.cp', {
+  itemSelector: '.cp-item',
   columnWidth: 100
 });
-
-
-document.addEventListener("DOMContentLoaded", function(){
 // collection of Draggabillies
 pckry.getItemElements().forEach( function( itemElem ) {
   var draggie = new Draggabilly( itemElem );
@@ -20,15 +17,17 @@ pckry.getItemElements().forEach( function( itemElem ) {
   draggie['disable']();
 });
 
-
-
+console.log(draggies);
 
 });
 
+var pckry;
 var draggies = [];
 var isDrag = false;
 function LockToggle() {
     // check if checkbox is checked
+    console.log(pckry);
+    console.log(draggies);
     var method = isDrag ? 'disable' : 'enable';
     draggies.forEach( function( draggie ) {
         draggie[ method ]();

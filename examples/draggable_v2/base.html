@@ -7,10 +7,12 @@
   <script src="/src/js/draggabilly.pkgd.min.js"></script>
   <script src="/src/js/socket.io.js"></script>
   <script src="/src/js/time_series.js" ></script>
-  <link rel="stylesheet" href="/src/css/gui.css">
+  <script src="/src/js/pushbutton.js" ></script>
+  <script src="/src/js/toggle.js" ></script>
+  <script src="/src/js/wNumb.js" ></script>
+  <script src="/src/js/numerical_reporter.js" ></script>
   <link rel="stylesheet" type="text/css" href="/src/css/checkboxes.min.css">
   <link rel="stylesheet" type="text/css" href="/src/css/gui.css">
-  <script src="/src/js/draggable.js"></script>
 
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
@@ -25,14 +27,18 @@
     <label for="ckbx-style-8-1"></label>
 </div>
 
-<div class="grid">
-  <div class="grid-item grid-item--width2">
+<div class="cp">
+  <div class="cp-item grid-item--width2">
   <div class="ckbx-style-1">
                         <input type="checkbox" id="ckbx-style-1-1" value="0" name="ckbx-style-1">
                         <label for="ckbx-style-1-1"></label>
                     </div></div>
-  <div class="grid-item" id="plotbox"></div>
-  <div class="grid-item" id="plotbox2"></div>
+  <div class="cp-item" id="plotbox"></div>
+  <div class="cp-item" id="plotbox2"></div>
+  <div class="cp-item" id="num1"></div>
+  <div class="cp-item" id="num2"></div>
+  <div class="cp-item" id="toggle1"></div>
+  <div class="cp-item" id="toggle2"></div>
 </div>
 
 
@@ -47,17 +53,38 @@ var PLOT_HEIGHT = 200;
 var PLOT_WIDTH = 300;
 var plot;
 var plot2;
+var pb1;
+var pb2;
+var pb3;
+var toggle_1;
+
+var reporter_x;
+var reporter_y;
+var reporter_x2;
+var reporter_y2;
+
 window.onload = function(){
     var socket = io('http://localhost:3000');
     var unique = 456;
+    
     plot = new Time_Series("plotbox",'Sine Waves',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],2,["green","yellow"],unique,socket);
     plot2 = new Time_Series("plotbox2",'Mouse Moves',PLOT_WIDTH, PLOT_HEIGHT,60,[0,1000],2,["red","blue"],unique+1);
     timer = setInterval(function(){
         plot2.step([[mouseX],[mouseY]]);
     }, 10);
+    pb1  = new PushButton("toggle1",123123,"Fire","Red","Black");
+    pb2 = new PushButton("toggle1",111,"Cheer","Gray","Blue");
+    toggle_1 = new Toggle("num1","X Position",["Red","Blue"],'asdf')
+    pb3 = new PushButton("num1",unique+3,"Extra",socket);
+    reporter_x = new Numerical_Reporter("num1","X Position",[-100,500],"red","black", 13);
+    reporter_y = new Numerical_Reporter("toggle2","Y Position",[50,250],"yellow","blue", 14);
+    reporter_x2 = new Numerical_Reporter("toggle2","X Position",[,],"black","gray", 1344,4,socket);
+    reporter_y2 = new Numerical_Reporter("toggle2","Y Position",[,],"orange","red", 1455,6,socket);
+
 }
 </script>
 
+<script src="/src/js/draggable.js"></script>
 
 </body>
 </html>

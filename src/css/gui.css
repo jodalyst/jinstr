@@ -262,12 +262,10 @@ svg {
 
 
 
-/*GRID STUFF BELOW:*/
-/* ---- grid ---- */
 
 * { box-sizing: border-box; } 
 
-.grid {
+.cp {
   /*background: #DDD;*/
   max-width: 1200px;
   border: 2px inset;
@@ -275,7 +273,7 @@ svg {
 }
 
 /* clear fix */
-.grid:after {
+.cp:after {
   content: '';
   display: block;
   clear: both;
@@ -283,7 +281,7 @@ svg {
 
 /* ---- .grid-item ---- */
 
-.grid-item {
+.cp-item {
   float: left;
   /*width: 100px;
   height: 100px;
@@ -293,17 +291,17 @@ svg {
   padding: 10px;
 }
 
-.grid-item--width2 { width: 200px; }
-.grid-item--height2 { height: 200px; }
+.cp-item--width2 { width: 200px; }
+.cp-item--height2 { height: 200px; }
 
-.grid-item:hover {
-  border-color: hsla(0, 0%, 100%, 0.5);
+.cp-item:hover {
+  border-color: hsla(0, 0%, 50%, 0.5);
   cursor: move;
 }
 
-.grid-item.is-dragging,
-.grid-item.is-positioning-post-drag {
-  background: #C90;
+.cp-item.is-dragging,
+.cp-item.is-positioning-post-drag {
+  background: #cbf9ac;
   z-index: 2;
 }
 
