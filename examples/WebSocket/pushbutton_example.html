@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/src/js/socket.io.js"></script>
+  <script src="/src/js/pushbutton.js" ></script>
+  <link rel="stylesheet" href="/src/css/gui.css">
+
+
+  <title>Toggle Demo of Push Buttons</title>
+</head>
+<body>
+<p>Two Push Buttons</p>
+  <div id="pos_1"></div>
+</body>
+<script>
+
+var unique1 = 123;
+var unique2 = 124;
+
+window.onload = function(){
+    var socket = io('http://0.0.0.0:5000');
+    var pb1  = new PushButton("pos_1",unique1,"Fire","Red","Black",socket);
+    var pb2 = new PushButton("pos_1",unique2,"Cheer","Gray","Blue",socket);
+    var pb3 = new PushButton("pos_1",unique2+1,"Extra",socket);
+}
+</script>
+</html>
