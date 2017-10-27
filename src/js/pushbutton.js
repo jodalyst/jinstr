@@ -30,14 +30,15 @@ function PushButton(div_id,unique,label,color=null,bg_color=null,socket=null){
     setup();
 
     if (socket != null){
-        button_element.addEventListener("click",function(){
+        button_element.addEventListener("mousedown",function(){
             console.log("PUSH");
             socket.emit('reporting', {'unique':unique, 'data':"Push"});
         });
         //off(clicking not working...is fine for now')
-        button_element.addEventListener('unclick',function(){
+        button_element.addEventListener('mouseup',function(){
             console.log("UNPUSH");
             socket.emit('reporting', {'unique':unique, 'data':"Unpush"});
+            socket.emit("THING");
         });
         socket.on("update_"+unique,function(val){
             button_element.style.backgroundColor = val['bgcolor'];

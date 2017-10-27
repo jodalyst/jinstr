@@ -116,11 +116,12 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     op.setAttribute("id",div_id+unique+"OI");
     op.setAttribute('class','scaler');
     op.innerHTML = 'O+';
-    var oi = document.createElement('button');
-    oi.setAttribute("id",div_id+unique+"OD");
-    oi.setAttribute('class','scaler');
-    oi.innerHTML = 'O-';
-    BC1.appendChild(oi);
+    var od = document.createElement('button');
+    od.setAttribute("id",div_id+unique+"OD");
+    od.setAttribute('class','scaler');
+    od.innerHTML = 'O-';
+    BC1.appendChild(op);
+    BC1.appendChild(od);
     var BC4 = document.createElement('div');
     BC4.setAttribute("id", div_id+unique+"BC4");
     BC4.setAttribute("class", "h_button_container");

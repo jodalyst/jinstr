@@ -31,7 +31,8 @@ from flask_socketio import SocketIO, emit, join_room, leave_room,close_room, roo
 # the best option based on available packages.
 #async_mode = 'threading'
 #async_mode = 'eventlet'
-async_mode = 'eventlet'
+async_mode = None
+
 if async_mode is None:
     try:
         import eventlet
@@ -64,8 +65,10 @@ elif async_mode == 'gevent':
 app = Flask(__name__, template_folder = './',static_folder='../../src')
 app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
 #socketio = SocketIO(app, async_mode = async_mode)
-socketio = SocketIO(app, async_mode=async_mode, allow_upgrades=True, cookie=None, http_compression=False)
+socketio = SocketIO(app, allow_upgrades=True, cookie=None, http_compression=False)
 thread = None
+
+
 
 def dataThread():
     unique = 123
@@ -73,20 +76,42 @@ def dataThread():
     while True:
         time.sleep(0.02)
         count +=1
-        if count == 400:
+        if count == 100:
             socketio.emit('update_{}'.format(unique),{'color':'Blue','bgcolor':'Red','text':str(time.time())});
             print('sending')
+        if count == 200:
+            socketio.emit('#qq');
+            print('sending #qq')
             count = 0
 
 @app.route('/')
 def index():
     global thread
     print ("A user connected")
-    if thread is None:
-        thread = Thread(target=dataThread)
-        thread.daemon = True
-        thread.start()
-    return render_template('pushbutton_example.html')
+    #if thread is None:
+    #    thread = Thread(target=dataThread)
+    #    thread.daemon = True
+    #    thread.start()
+    return render_template('plotter.html')
+
+
+
+@socketio.on('connect','/gui')
+def action():
+    print('GUI Connected')
+
+@socketio.on('connect','/gui')
+def action():
+    print('General Connection')
+
+@socketio.on('#qq')
+def action(content):
+    print("BOOM");
+
+@socketio.on('data')
+def action(content):
+    print(content)
+    socketio.emit('update_456',content, namespace='/gui')#,broadcast =True)
 
 @socketio.on('reporting')
 def action(content):
