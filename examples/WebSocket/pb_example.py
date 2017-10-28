@@ -25,6 +25,7 @@ import math
 from threading import Thread, Lock
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit, join_room, leave_room,close_room, rooms, disconnect
+from flask_cors import CORS, cross_origin
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -63,11 +64,16 @@ elif async_mode == 'gevent':
 
 #Start up Flask server:
 app = Flask(__name__, template_folder = './',static_folder='../../src')
-app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
+#app.config['SECRET_KEY'] = 'secret!' #shhh don't tell anyone. Is a secret
 #socketio = SocketIO(app, async_mode = async_mode)
+CORS(app,resources={
+    r'/*/*': {
+        'origins': '*',
+        'allow_headers': ['Content-Type', 'Authorization']
+    }
+})
 socketio = SocketIO(app, allow_upgrades=True, cookie=None, http_compression=False)
 thread = None
-
 
 
 def dataThread():

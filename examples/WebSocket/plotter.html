@@ -54,14 +54,37 @@ var reporter_y2;
 
 window.onload = function(){
     //var socket = io('http://localhost:5000','/gui');
-    var socket = io('/gui');
+    //var socket = io('/gui');
+    //var socket = io('http://192.168.0.104');
+    var ws = new WebSocket("ws://192.168.0.104");
     var unique = 456;
-    plot = new Time_Series("plotbox",'Accelerations',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],3,["green","yellow","blue"],unique,socket);
+    plot = new Time_Series("plotbox",'Accelerations',PLOT_WIDTH, PLOT_HEIGHT,60,[-100,100],3,["green","yellow","blue"],unique);
     plot2 = new Time_Series("plotbox2",'Mouse Moves',PLOT_WIDTH, PLOT_HEIGHT,60,[0,1000],2,["red","blue"],unique+1);
     //pb1  = new PushButton("toggle1",123123,"Fire","Red","Black");
     timer = setInterval(function(){
         plot2.step([[mouseX],[mouseY]]);
+      ws.send("Parameter Request");
     }, 10);
+    timer2 = setInterval(function(){
+        ws.send("Parameter Request");
+    }, 100);
+    ws.onopen = function(){
+      // Web Socket is connected, send data using send()
+      ws.send("Parameter Request");
+      console.log("Message is sent...");
+    };
+ 
+    ws.onmessage = function (evt) { 
+      console.log("got it");
+      var received_msg = evt.data;
+      console.log(received_msg);
+      plot.step(eval(received_msg));
+    };
+ 
+    ws.onclose = function(){ 
+      // websocket is closed.
+      console.log("Connection is closed..."); 
+    };
 }
 </script>
 
