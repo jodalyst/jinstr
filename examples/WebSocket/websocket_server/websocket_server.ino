@@ -1,21 +1,12 @@
 #include <WiFi.h>
 #include <WebSocketServer.h>
 
-const char* ssid     = "Hercules_Mulligan";
-const char* password = "comcastsucks99";
+const char* ssid     = "J2";
+const char* password = "18611865";
 WiFiServer server(80);
 WebSocketServer webSocketServer;
+WiFiClient client;
 
-
-void handleClientData(String &dataString) {
-  Serial.println(dataString);
-}
-
-// send the client the analog value of a pin
-void sendClientData() {
-  String data = "secret message";  
-  webSocketServer.sendData(data);  
-}
 
 int value;
 long unsigned int timeo;
@@ -38,14 +29,13 @@ void setup()
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
     server.begin();
-    value = 0;
     timeo = micros();
 }
 
 
 
 void loop(){
- WiFiClient client = server.available();   // listen for incoming clients
+ client = server.available();   // listen for incoming clients
   if (client) {                             // if you get a client,
     Serial.println("New Client.");           // print a message out the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
@@ -55,14 +45,11 @@ void loop(){
         timeo = micros();
         if (client.available()) {             // if there's bytes to read from the client,
           String data = webSocketServer.getData();
-          Serial.print("data received: ");
-          Serial.println(data);
         String z = String(analogRead(A0)*0.01);
         String y = String(analogRead(A3)*0.01);
         String x = String(analogRead(A6)*0.01);
         //String sdata = "42[\"update_456\",[["+x+"],["+y+"],["+z+"]]]";
         String sdata = "[["+x+"],["+y+"],["+z+"]]";
-        Serial.println("Sending Data"+String(value)); 
         unsigned long start = micros(); 
         webSocketServer.sendData(sdata);
         Serial.println(micros()-start);

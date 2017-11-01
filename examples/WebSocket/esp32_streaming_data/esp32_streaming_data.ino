@@ -7,42 +7,41 @@ IPAddress server(18,62,31,157);
 byte mac[6];
 char macaddress[30];
 WebSocketClient webSocketClient;
-
 // Use WiFiClient class to create TCP connections
 WiFiClient client;
 
 #define SAMPLE_BIN 5
+
+
+const char* ssid     = "J2";
+const char* password = "18611865";
 
 int count;
 
 void setup() {
   Serial.begin(115200);
   delay(10);
-
-  // We start by connecting to a WiFi network
-  //get password and username from eeprom
-  //String pwd = pref.getString("pw", "comcastsucks99");
-  String pwd =""; 
-  int i = pwd.length() + 1;
-  char password[i];
-  pwd.toCharArray(password, i);
-  String ssi = "EECS-ConfRooms";
-  i = ssi.length() + 1;
-  char ssid[i];
-  ssi.toCharArray(ssid, i);
-  //get host from eeprom
-  //String eehos = pref.getString("eehost", "xxx.co.za");
-  //wss://echo.websocket.org
-  String eehos = "http://192.168.0.102";// = pref.getString("eehost", "http://192.168.0.102");
-
-  i = eehos.length() + 1;
-  char eehost[i];
-  eehos.toCharArray(eehost, i);
-  //get path to websockets 
-  String eepat = "/";
-  i = eepat.length() + 1;
-  char eepath[i];
-  eepat.toCharArray(eepath, i);
+//  String pwd ="18611865"; 
+//  int i = pwd.length() + 1;
+//  char password[i];
+//  pwd.toCharArray(password, i);
+//  String ssi = "J2";
+//  i = ssi.length() + 1;
+//  char ssid[i];
+//  ssi.toCharArray(ssid, i);
+//  //get host from eeprom
+//  //String eehos = pref.getString("eehost", "xxx.co.za");
+//  //wss://echo.websocket.org
+//  String eehos = "http://192.168.0.102";// = pref.getString("eehost", "http://192.168.0.102");
+//
+//  i = eehos.length() + 1;
+//  char eehost[i];
+//  eehos.toCharArray(eehost, i);
+//  //get path to websockets 
+//  String eepat = "/";
+//  i = eepat.length() + 1;
+//  char eepath[i];
+//  eepat.toCharArray(eepath, i);
 
   //Connecting to Wifi Network:
   Serial.print("Connecting to ");
@@ -65,41 +64,41 @@ void setup() {
   //Serial.println(mac);
 
 
-  // Connect to the websocket server
-  if (client.connect(server, 5000)) {
-    Serial.println("xxx Connected");
-  } else {
-    Serial.println("xxx Connection failed.");
-    while (1) {
-      // Hang on failure
-    }
-  }
-  char path[50];
-  memset(path, 0, sizeof(path));
-  strcpy(path, eepath);
-  //turn the mac array into a char array with separators
-  memset(macaddress, 0, sizeof(macaddress));
-  char result[5];
-  for (int i = 0; i < 6; i++)
-  {
-    memset(result, 0, sizeof(result));
-    sprintf(result, "%x", (char)mac[i]);
-    //macaddress[i] = (char)mac[i];
-    strcat(macaddress, result);
-    strcat(macaddress, "-");
-  }
-  strcat(path, macaddress);
-  // Handshake with the server
-  webSocketClient.path = path;
-  webSocketClient.host = eehost;
-  if (webSocketClient.handshake(client)) {
-    Serial.println("Handshake successful");
-  } else {
-    Serial.println("Handshake failed.");
-    while (1) {
-      // Hang on failure
-    }
-  }
+//  // Connect to the websocket server
+//  if (client.connect(server, 5000)) {
+//    Serial.println("xxx Connected");
+//  } else {
+//    Serial.println("xxx Connection failed.");
+//    while (1) {
+//      // Hang on failure
+//    }
+//  }
+//  char path[50];
+//  memset(path, 0, sizeof(path));
+//  strcpy(path, eepath);
+//  //turn the mac array into a char array with separators
+//  memset(macaddress, 0, sizeof(macaddress));
+//  char result[5];
+//  for (int i = 0; i < 6; i++)
+//  {
+//    memset(result, 0, sizeof(result));
+//    sprintf(result, "%x", (char)mac[i]);
+//    //macaddress[i] = (char)mac[i];
+//    strcat(macaddress, result);
+//    strcat(macaddress, "-");
+//  }
+//  strcat(path, macaddress);
+//  // Handshake with the server
+//  webSocketClient.path = path;
+//  webSocketClient.host = eehost;
+//  if (webSocketClient.handshake(client)) {
+//    Serial.println("Handshake successful");
+//  } else {
+//    Serial.println("Handshake failed.");
+//    while (1) {
+//      // Hang on failure
+//    }
+//  }
  count = 0; 
 }
 
@@ -135,8 +134,8 @@ void loop() {
     }
   } else {
     Serial.println("Client disconnected. Restarting system...");
-    delay(2000);
-    esp_restart(); //testing the restart command more than anything else
+    //delay(2000);
+    //esp_restart(); //testing the restart command more than anything else
   }
   count +=1;
   delay(10);
