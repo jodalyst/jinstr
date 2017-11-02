@@ -1,23 +1,20 @@
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 
 window.addEventListener("load", function(){
-    console.log("event!");
-//document.addEventListener("load", function(){
-
-// external js: packery.pkgd.js, draggabilly.pkgd.js
-pckry = new Packery( '.cp', {
-  itemSelector: '.cp-item',
-  columnWidth: 1
-});
-// collection of Draggabillies
-pckry.getItemElements().forEach( function( itemElem ) {
-  var draggie = new Draggabilly( itemElem );
-  draggies.push(draggie);
-  pckry.bindDraggabillyEvents( draggie );
-  draggie['disable']();
-});
-
-console.log(draggies);
+  //document.addEventListener("load", function(){
+  
+  // external js: packery.pkgd.js, draggabilly.pkgd.js
+  pckry = new Packery( '.cp', {
+    itemSelector: '.cp-item',
+    columnWidth: 1
+  });
+  // collection of Draggabillies
+  pckry.getItemElements().forEach( function( itemElem ) {
+    var draggie = new Draggabilly( itemElem );
+    draggies.push(draggie);
+    pckry.bindDraggabillyEvents( draggie );
+    draggie['disable']();
+  });
 
 });
 

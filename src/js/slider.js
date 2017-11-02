@@ -1,5 +1,43 @@
-// Define the socket
-var socket = io('http://localhost:3000');
+/*
+<div class="ckbx-style-8">
+    <input type="checkbox" id="ckbx-style-8-1" value="1" name="hey" onclick="LockToggle()">
+    <label for="ckbx-style-8-1"></label>
+</div>
+*/
+
+
+function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socket=null){
+    var div_id = String(div_id);
+    var label = String(label);
+    var color = color;
+    var unique = String(unique); //unique identifying number
+    var socket = socket;
+    var overall_div = document.getElementById(div_id);
+    var holder;
+    var toggle_element;
+    var setup = function(){
+        holder = document.createElement("div");
+        holder.setAttribute("id", div_id+unique+"_holder");
+        holder.setAttribute("class", "button_holder");
+        overall_div.appendChild(holder);
+        button_element = document.createElement("button");
+        button_element.setAttribute("class","gui_button");
+        button_element.setAttribute("id",div_id+unique+"button");
+        button_element.innerHTML = label;
+        holder.appendChild(button_element);
+           
+        if (bg_color===null || color===null){
+            console.log("no color");
+        }else{
+            button_element.setAttribute("style","background-color:"+bg_color+";color: "+color);
+        }
+        //$("#"+div_id+unique+"_holder").trigger("create");
+    }
+    setup();
+
+
+
+
 
 // Manual Slider Builder
 function Slider(div_id,name,min,max,resolution,unique,socket=null){
