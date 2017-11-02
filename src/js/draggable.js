@@ -21,7 +21,7 @@ window.addEventListener("load", function(){
 var pckry;
 var draggies = [];
 var isDrag = false;
-function LockToggle() {
+document.getElementById("grid_lock").addEventListener("change",function() {
     // check if checkbox is checked
     console.log(pckry);
     console.log(draggies);
@@ -31,6 +31,11 @@ function LockToggle() {
     });
     // switch flag
     isDrag = !isDrag;
+    if (isDrag){
+        document.getElementById("grid_status").innerHTML = "Grid UnLocked";
+    }else{
+        document.getElementById("grid_status").innerHTML = "Grid Locked";
+    }
     /*if (document.querySelector('#my-checkbox').checked) {
       // if checked
       console.log('checked');
@@ -38,5 +43,4 @@ function LockToggle() {
       // if unchecked
       console.log('unchecked');
     }*/
-  }
-
+  });

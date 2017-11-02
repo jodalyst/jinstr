@@ -14,24 +14,50 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
     var socket = socket;
     var overall_div = document.getElementById(div_id);
     var holder;
+    var slider_element;
     var toggle_element;
+    var is_toggling = false;
     var setup = function(){
         holder = document.createElement("div");
         holder.setAttribute("id", div_id+unique+"_holder");
-        holder.setAttribute("class", "button_holder");
+        holder.setAttribute("class", "slider_holder");
         overall_div.appendChild(holder);
-        button_element = document.createElement("button");
-        button_element.setAttribute("class","gui_button");
-        button_element.setAttribute("id",div_id+unique+"button");
-        button_element.innerHTML = label;
-        holder.appendChild(button_element);
+        var label_element = document.createElement("div");
+        label_element.setAttribute("class","slider_label");
+        label_element.innerHTML = label;
+        holder.appendChild(label_element);
+        slider_element = document.createElement("div");
+        slider_element.setAttribute("id", div_id+unique+"slider");
+        holder.appendChild(slider_element); 
+        if (toggle){
+            noUiSlider.create(html5Slider, {
+                start: [min,0,max],
+                connect: false,
+                range: {
+                    'min': min,
+                    'max': max
+                }
+            });
+            //Build toggle part
+            toggle_element = document.createElement("div");
+            toggle_element.setAttribute("id", div_id+unique+"toggler");
+            toggle_element.setAttribute("class","ckbx-style-8");
+            var toggle_in = document.createElement("div");
+            toggle_in.setAttribute("type","checkbox");
+            toggle_in.setAttribute("id", div_id+unique+"checkbox");
+            toggle_in.setAttribute("value","1");
+            var toggle_lab = document.createElement("label");
+            toggle_lab.setAttribute("for",div_id+unique+"checkbox");
+            toggle_element.appendChild(toggle_in);
+            toggle_element.appendChild(toggle_lab);
+            holder.appendChild(toggle_element);
+        }
            
-        if (bg_color===null || color===null){
+        if (color===null){
             console.log("no color");
         }else{
-            button_element.setAttribute("style","background-color:"+bg_color+";color: "+color);
+
         }
-        //$("#"+div_id+unique+"_holder").trigger("create");
     }
     setup();
 
