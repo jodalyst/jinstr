@@ -1,11 +1,11 @@
 #include <WiFi.h>
 #include <WebSocketServer.h>
 
-//const char* ssid     = "J2";
-//const char* password = "18611865";
-
-const char* ssid     = "EECS-ConfRooms";
+const char* ssid     = "EECS-MTL-RLE";
 const char* password = "";
+
+//const char* ssid     = "EECS-ConfRooms";
+//const char* password = "";
 WiFiServer server(80);
 WebSocketServer webSocketServer;
 WiFiClient client;
