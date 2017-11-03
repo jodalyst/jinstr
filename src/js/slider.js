@@ -27,6 +27,7 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
         spec_input.setAttribute("min",min);
         spec_input.setAttribute("max",max);
         spec_input.setAttribute("id",div_id+unique+"manual_input");
+        spec_input.setAttribute("class","spec_input");
         holder.appendChild(spec_input); 
         if (toggle){
             noUiSlider.create(slider_element, {
@@ -65,6 +66,9 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
             spec_input.addEventListener('change', function(){
                 slider_element.noUiSlider.set([null, this.value, null]);
             });
+
+
+
         }else{
             noUiSlider.create(slider_element, {
                 start: [0],
@@ -73,6 +77,9 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
                     'min': min,
                     'max': max
                 }
+            });
+            spec_input.addEventListener('change', function(){
+                slider_element.noUiSlider.set([this.value]);
             });
         }
     }

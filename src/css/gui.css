@@ -37,6 +37,13 @@ svg {
     font-size: 18px;
 }
 
+.slider_label {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .number_holder {
     margin: 5px;
     display: -ms-flexbox;
@@ -319,6 +326,24 @@ svg {
   clear: both;
 }
 
+spec_input {
+    padding: 7px;
+    margin: 15px 5px 5px;
+    width: 70px;
+}
+
+.slider_holder{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: middle;
+    width: 150px;
+}
+
+
 /* ---- .grid-item ---- */
 
 .cp-item {
@@ -351,3 +376,6 @@ svg {
   -webkit-transition: -webkit-transform 0.2s;
           transition: transform 0.2s;
 }
+
+
+
