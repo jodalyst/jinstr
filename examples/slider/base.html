@@ -33,7 +33,7 @@
 <div class="cp">
   <div class="cp-item" id="pos_1"></div>
   <div class="cp-item" id="pos_2"></div>
-  <div class="cp-item" id="pos_2"><input type="number"/></div>
+  <div class="cp-item" id="pos_2"><div class="handle"></div><input type="number"/></div>
 </div>
 
 </body>
@@ -45,10 +45,7 @@ var unique2 = 124;
 //function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socket=null){
 
 window.onload = function(){
-    var socket = io('http://localhost:3000');
-    var pb1  = new PushButton("pos_1",unique1,"Fire","Red","Black",socket);
-    var pb2 = new PushButton("pos_1",unique2,"Cheer","Gray","Blue",socket);
-    var pb3 = new PushButton("pos_1",unique2+1,"Extra",socket);
+    var pb3 = new PushButton("pos_1",unique2+1,"Extra");
     var slider1 = new Slider("pos_2","K_p",0,20,0.01,false,unique2+3);
 }
 

@@ -10,7 +10,7 @@ window.addEventListener("load", function(){
   });
   // collection of Draggabillies
   pckry.getItemElements().forEach( function( itemElem ) {
-    var draggie = new Draggabilly( itemElem );
+    var draggie = new Draggabilly( itemElem ,{handle:'.handle'});
     draggies.push(draggie);
     pckry.bindDraggabillyEvents( draggie );
     draggie['disable']();

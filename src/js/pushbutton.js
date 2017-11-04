@@ -10,9 +10,12 @@ function PushButton(div_id,unique,label,color=null,bg_color=null,socket=null){
     var holder;
     var button_element;
     var setup = function(){
+        var handle = document.createElement("div");
+        handle.setAttribute("class","handle");
         holder = document.createElement("div");
         holder.setAttribute("id", div_id+unique+"_holder");
         holder.setAttribute("class", "button_holder");
+        overall_div.appendChild(handle);
         overall_div.appendChild(holder);
         button_element = document.createElement("button");
         button_element.setAttribute("class","gui_button");

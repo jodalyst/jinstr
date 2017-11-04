@@ -24,9 +24,12 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
     var is_toggling = false;
     var spec_input;
     var setup = function(){
+        var handle = document.createElement("div");
+        handle.setAttribute("class","handle");
+        overall_div.appendChild(handle);
         holder = document.createElement("div");
         holder.setAttribute("id", div_id+unique+"_holder");
-        holder.setAttribute("class", "handle, slider_holder");
+        holder.setAttribute("class", "slider_holder");
         overall_div.appendChild(holder);
         var label_element = document.createElement("div");
         label_element.setAttribute("class","slider_label");

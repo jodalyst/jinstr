@@ -22,6 +22,9 @@ function Time_Series(div_id,title,width,height,x_range,y_range,num_traces,colors
     var width = total_width - margin.right - margin.left;
     var overall = document.createElement('div');
     overall.setAttribute("id", div_id+unique+"_overall");
+    var handle = document.createElement("div");
+    handle.setAttribute("class","handle");
+    overall.appendChild(handle);
     document.getElementById(div_id).appendChild(overall);
     var title_div = document.createElement('div');
     title_div.setAttribute("id", div_id+unique+"_title");
