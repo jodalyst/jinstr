@@ -8,7 +8,7 @@ resolution: The resolution/granularity of the output values
 toggle: do you want toggling capabilities (will add two additional range limiting sliders, and a period input and toggle toggle
 unique: A unique (for the GUI) phrase used in DOM construction to prevent cross-talk between event handling
 color: (default null): Unsupported right now
-socket: (default null): a websocket object for outside communication emission
+socket: (default null): a standard websocket object for outside communication emission
 */
 
 function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socket=null){
@@ -49,7 +49,7 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
         if (toggle){
             noUiSlider.create(slider_element, {
                 start: [min,0,max],
-                connect: true,
+                connect: [true,false,false,true],
                 tooltips: [true, false, true],
                 range: {
                     'min': min,
@@ -80,6 +80,10 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
             toggle_element.appendChild(toggle_in);
             toggle_element.appendChild(toggle_lab);
             holder.appendChild(toggle_element);
+            slider_element.noUiSlider.on('update',function(value) {
+                console.log(value);
+                spec_input.value = value[1];
+            });
         }else{
             noUiSlider.create(slider_element, {
                 start: [0],
@@ -98,8 +102,8 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
     }
     setup();
     spec_input.addEventListener('change', function(){
-        console.log(this);
-        slider_element.noUiSlider.set([this.value]);
+        if (toggle) slider_element.noUiSlider.set([null,this.value,null]);
+        else  slider_element.noUiSlider.set([this.value]);
     });
 };
 
