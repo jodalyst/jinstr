@@ -1,8 +1,12 @@
-#include <WiFi.h>
+
 #include <WebSocketServer.h>
 
-const char* ssid     = "J2";
-const char* password = "18611865";
+#include <SPI.h>
+#include <WiFi101.h>
+
+
+char* ssid     = "J2";
+char* password = "18611865";
 
 //const char* ssid     = "EECS-ConfRooms";
 //const char* password = "";
@@ -32,6 +36,8 @@ void setup()
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
     server.begin();
+
+    printWiFiStatus();
     timeo = micros();
 }
 
@@ -55,7 +61,8 @@ void loop(){
         String sdata = "[["+x+"],["+y+"],["+z+"]]";
         unsigned long start = micros(); 
         webSocketServer.sendData(sdata);
-        Serial.println(micros()-start);
+        //Serial.println(micros()-start);
+        Serial.println(x);
         }
         while (micros()-timeo<1000);//wait
       }
@@ -64,4 +71,23 @@ void loop(){
     //client.stop();
     //Serial.println("Client Disconnected.");
   }
+}
+
+
+
+void printWiFiStatus() {
+  // print the SSID of the network you're attached to:
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+
+  // print your WiFi shield's IP address:
+  IPAddress ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+
+  // print the received signal strength:
+  long rssi = WiFi.RSSI();
+  Serial.print("signal strength (RSSI):");
+  Serial.print(rssi);
+  Serial.println(" dBm");
 }
