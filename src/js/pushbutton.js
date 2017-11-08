@@ -1,7 +1,8 @@
-function PushButton(div_id,unique,label,color=null,bg_color=null,socket=null){
+function PushButton(div_id,unique,title,label,color=null,bg_color=null,socket=null){
     var div_id = String(div_id);
     var label = String(label);
     var color = color;
+    var title = String(title);
     var bg_color = bg_color;
     var value; //holds toggle value right now
     var unique = String(unique); //unique identifying number
@@ -10,11 +11,14 @@ function PushButton(div_id,unique,label,color=null,bg_color=null,socket=null){
     var holder;
     var button_element;
     var setup = function(){
+        var button_title = document.createElement("div");
+        button_title.innerHTML=title;
         var handle = document.createElement("div");
         handle.setAttribute("class","handle");
         holder = document.createElement("div");
         holder.setAttribute("id", div_id+unique+"_holder");
         holder.setAttribute("class", "button_holder");
+        holder.appendChild(button_title);
         overall_div.appendChild(handle);
         overall_div.appendChild(holder);
         button_element = document.createElement("button");

@@ -44,7 +44,10 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
         spec_input.setAttribute("min",min);
         spec_input.setAttribute("max",max);
         spec_input.setAttribute("id",div_id+unique+"manual_input");
-        spec_input.setAttribute("class","spec_input");
+        spec_input.setAttribute("class","numerical_input");
+        var inlabel = document.createElement("span");
+        inlabel.innerHTML= "Value:";
+        holder.appendChild(inlabel);
         holder.appendChild(spec_input); 
         if (toggle){
             noUiSlider.create(slider_element, {
@@ -57,15 +60,16 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
                 }
             });
             var period_container = document.createElement("span");
-            var period_label = document.createElement("p");
+            var period_label = document.createElement("span");
             period_label.innerHTML = "Period(s):";
             period_container.appendChild(period_label);
             var period_input = document.createElement("input");
             period_input.setAttribute("type","number");
-            period_input.setAttribute("step",resolution);
+            period_input.setAttribute("step",1);
             period_input.setAttribute("min",0);
             period_input.setAttribute("max",max);
             period_input.setAttribute("id",div_id+unique+"period_input");
+            period_input.setAttribute("class","numerical_input");
             period_container.appendChild(period_input);
             //Build toggle part
             toggle_element = document.createElement("div");
@@ -80,6 +84,7 @@ function Slider(div_id,label,min, max, resolution,toggle,unique,color=null,socke
             toggle_element.appendChild(toggle_in);
             toggle_element.appendChild(toggle_lab);
             holder.appendChild(toggle_element);
+            holder.appendChild(period_container);
             slider_element.noUiSlider.on('update',function(value) {
                 console.log(value);
                 spec_input.value = value[1];

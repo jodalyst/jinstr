@@ -46,13 +46,14 @@ void loop(){
       Serial.println("Handshake happened:");
       while (client.connected() ) {            // loop while the client's connected
         timeo = micros();
-        if (client.available()) {             // if there's bytes to read from the client,
-          String data = webSocketServer.getData();
         String z = String(analogRead(A0)*0.01);
         String y = String(analogRead(A3)*0.01);
         String x = String(analogRead(A6)*0.01);
         //String sdata = "42[\"update_456\",[["+x+"],["+y+"],["+z+"]]]";
         String sdata = "[["+x+"],["+y+"],["+z+"]]";
+        //Serial.println(sdata);
+        if (client.available()) {             // if there's bytes to read from the client,
+          String data = webSocketServer.getData();
         unsigned long start = micros(); 
         webSocketServer.sendData(sdata);
         Serial.println(micros()-start);
