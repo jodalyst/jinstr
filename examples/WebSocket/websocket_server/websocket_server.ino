@@ -66,3 +66,21 @@ void loop(){
     //Serial.println("Client Disconnected.");
   }
 }
+
+class GuiBuilder{
+    char buildstring[512];
+    int module_count;
+  public:
+    int
+    void addTimePlot(String name, int width, int height, int xcount,int ylim[2],int plot_num, String *colors){
+    }
+    void addPushButton(String name, String button_label){
+    }
+    void addSlider(String name,float low_bound, float high_bound, float resolution,bool toggle, float initial){
+    }
+    void addCSV(){
+    }
+    void erase(){
+    }
+}
+

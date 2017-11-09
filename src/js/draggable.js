@@ -1,5 +1,8 @@
 // external js: packery.pkgd.js, draggabilly.pkgd.js
 
+var pckry;
+var draggies = [];
+var isDrag = false;
 window.addEventListener("load", function(){
     //document.addEventListener("load", function(){
     
@@ -17,10 +20,6 @@ window.addEventListener("load", function(){
     });
     
 
-});
-    var pckry;
-    var draggies = [];
-    var isDrag = false;
     document.getElementById("grid_lock").addEventListener("change",function() {
         // check if checkbox is checked
         console.log(pckry);
@@ -45,3 +44,4 @@ window.addEventListener("load", function(){
         }*/
       });
 
+});

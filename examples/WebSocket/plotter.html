@@ -71,10 +71,10 @@ window.onload = function(){
     }, 10);
 }
 
-
+var ws;
 document.getElementById("ipsubmit").addEventListener("mousedown",function(){
     var ip = document.getElementById("ipaddress").value;
-    var ws = new WebSocket("ws://"+ip);
+    ws = new WebSocket("ws://"+ip);
     ws.onopen = function(){
       // Web Socket is connected, send data using send()
       ws.send("Parameter Request");
@@ -96,6 +96,15 @@ document.getElementById("ipsubmit").addEventListener("mousedown",function(){
     };
 });
 
+var draggable_divs = [];
+var modules = [];
+var in_labels = [];
+var out_labels = [];
+
+function parse_and_build(build_string){
+
+
+}
 
 </script>
 
